@@ -182,3 +182,5 @@ postgres_data/
 
 # Логи Airflow
 airflow/logs/
+
+backups/

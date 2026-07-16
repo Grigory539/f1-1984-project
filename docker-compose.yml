@@ -1,0 +1,87 @@
+services:
+  postgres:
+    image: postgres:13
+    container_name: f1_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_DB: f1_1984
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  airflow-init:
+    image: apache/airflow:2.7.0
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        mkdir -p /sources/logs /sources/dags /sources/plugins
+        chown -R "50000:0" /sources/{logs,dags,plugins}
+        airflow db migrate
+        airflow users create \
+          --username admin \
+          --password admin \
+          --firstname Admin \
+          --lastname User \
+          --role Admin \
+          --email admin@example.com || true
+    environment:
+      - AIRFLOW_UID=50000
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:postgres123@postgres/f1_1984?options=-c%20search_path=airflow_meta,public
+    volumes:
+      - ./airflow/dags:/sources/dags
+      - ./airflow/logs:/sources/logs
+      - ./airflow/plugins:/sources/plugins
+    depends_on:
+      - postgres
+
+  airflow-webserver:
+    image: apache/airflow:2.7.0
+    container_name: f1_airflow_webserver
+    command: webserver
+    ports:
+      - "8080:8080"
+    environment:
+      - AIRFLOW_UID=50000
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:postgres123@postgres/f1_1984?options=-c%20search_path=airflow_meta,public
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - _PIP_ADDITIONAL_REQUIREMENTS=pandas
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./data/raw:/opt/airflow/data
+      - ./sql:/opt/airflow/sql
+    depends_on:
+      - postgres
+      - airflow-init
+    restart: unless-stopped
+
+  airflow-scheduler:
+    image: apache/airflow:2.7.0
+    container_name: f1_airflow_scheduler
+    command: scheduler
+    environment:
+      - AIRFLOW_UID=50000
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:postgres123@postgres/f1_1984?options=-c%20search_path=airflow_meta,public
+      - _PIP_ADDITIONAL_REQUIREMENTS=pandas
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./data/raw:/opt/airflow/data
+      - ./sql:/opt/airflow/sql
+    depends_on:
+      - postgres
+      - airflow-init
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  

@@ -1,0 +1,2794 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict tOkRYTXCSPEaWe1KFLqpD70b7ZFqYbmWyddLSixAkcfbrJnSkfQkpgJhyd1rJYN
+
+-- Dumped from database version 13.23 (Debian 13.23-1.pgdg13+1)
+-- Dumped by pg_dump version 13.23 (Debian 13.23-1.pgdg13+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: constructor_report; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.constructor_report (
+    report_id integer NOT NULL,
+    constructor_name character varying(100),
+    total_points numeric(5,2),
+    wins_count integer,
+    poles_count integer,
+    avg_finish_position numeric(5,2),
+    avg_start_position numeric(5,2)
+);
+
+
+ALTER TABLE public.constructor_report OWNER TO postgres;
+
+--
+-- Name: constructor_report_report_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.constructor_report_report_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.constructor_report_report_id_seq OWNER TO postgres;
+
+--
+-- Name: constructor_report_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.constructor_report_report_id_seq OWNED BY public.constructor_report.report_id;
+
+
+--
+-- Name: grid_position; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.grid_position (
+    position_id integer NOT NULL,
+    pilot_name character varying(50),
+    race_name character varying(20),
+    starting_position smallint
+);
+
+
+ALTER TABLE public.grid_position OWNER TO postgres;
+
+--
+-- Name: grid_position_position_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.grid_position_position_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.grid_position_position_id_seq OWNER TO postgres;
+
+--
+-- Name: grid_position_position_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.grid_position_position_id_seq OWNED BY public.grid_position.position_id;
+
+
+--
+-- Name: laps_efficiency; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.laps_efficiency (
+    efficiency_id integer NOT NULL,
+    pilot_name character varying(100),
+    laps_led integer,
+    laps_raced numeric(10,2),
+    led_percentage numeric(5,2)
+);
+
+
+ALTER TABLE public.laps_efficiency OWNER TO postgres;
+
+--
+-- Name: laps_efficiency_efficiency_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.laps_efficiency_efficiency_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.laps_efficiency_efficiency_id_seq OWNER TO postgres;
+
+--
+-- Name: laps_efficiency_efficiency_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.laps_efficiency_efficiency_id_seq OWNED BY public.laps_efficiency.efficiency_id;
+
+
+--
+-- Name: laps_lead_stats_pilots; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.laps_lead_stats_pilots (
+    stat_id integer NOT NULL,
+    pilot_name character varying(50),
+    laps_lead numeric(10,2)
+);
+
+
+ALTER TABLE public.laps_lead_stats_pilots OWNER TO postgres;
+
+--
+-- Name: laps_lead_stats_pilots_stat_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.laps_lead_stats_pilots_stat_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.laps_lead_stats_pilots_stat_id_seq OWNER TO postgres;
+
+--
+-- Name: laps_lead_stats_pilots_stat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.laps_lead_stats_pilots_stat_id_seq OWNED BY public.laps_lead_stats_pilots.stat_id;
+
+
+--
+-- Name: laps_raced_stats_pilots; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.laps_raced_stats_pilots (
+    stat_id integer NOT NULL,
+    pilot_name character varying(50),
+    laps_raced numeric(10,2),
+    percentage numeric(5,2)
+);
+
+
+ALTER TABLE public.laps_raced_stats_pilots OWNER TO postgres;
+
+--
+-- Name: laps_raced_stats_pilots_stat_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.laps_raced_stats_pilots_stat_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.laps_raced_stats_pilots_stat_id_seq OWNER TO postgres;
+
+--
+-- Name: laps_raced_stats_pilots_stat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.laps_raced_stats_pilots_stat_id_seq OWNED BY public.laps_raced_stats_pilots.stat_id;
+
+
+--
+-- Name: pilot_stability; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.pilot_stability (
+    stability_id integer NOT NULL,
+    pilot_name character varying(100),
+    avg_finish_position numeric(5,2),
+    avg_start_position numeric(5,2),
+    avg_progress numeric(5,2),
+    races_count integer
+);
+
+
+ALTER TABLE public.pilot_stability OWNER TO postgres;
+
+--
+-- Name: pilot_stability_stability_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.pilot_stability_stability_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pilot_stability_stability_id_seq OWNER TO postgres;
+
+--
+-- Name: pilot_stability_stability_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.pilot_stability_stability_id_seq OWNED BY public.pilot_stability.stability_id;
+
+
+--
+-- Name: pilots; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.pilots (
+    pilot_id integer,
+    pilot_name character varying(50),
+    chassis character varying(30),
+    engine character varying(30),
+    best_result character varying(10),
+    best_grid_position character varying(10)
+);
+
+
+ALTER TABLE public.pilots OWNER TO postgres;
+
+--
+-- Name: pilots_top; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.pilots_top (
+    win_id integer NOT NULL,
+    pilot_name character varying(50),
+    total_points numeric(5,2),
+    wins_count integer,
+    podiums integer
+);
+
+
+ALTER TABLE public.pilots_top OWNER TO postgres;
+
+--
+-- Name: pilots_top_win_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.pilots_top_win_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pilots_top_win_id_seq OWNER TO postgres;
+
+--
+-- Name: pilots_top_win_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.pilots_top_win_id_seq OWNED BY public.pilots_top.win_id;
+
+
+--
+-- Name: pole_position_stats; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.pole_position_stats (
+    stat_id integer NOT NULL,
+    pilot_name character varying(100),
+    pole_count integer,
+    avg_starting_position numeric(5,2)
+);
+
+
+ALTER TABLE public.pole_position_stats OWNER TO postgres;
+
+--
+-- Name: pole_position_stats_stat_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.pole_position_stats_stat_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pole_position_stats_stat_id_seq OWNER TO postgres;
+
+--
+-- Name: pole_position_stats_stat_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.pole_position_stats_stat_id_seq OWNED BY public.pole_position_stats.stat_id;
+
+
+--
+-- Name: race_points; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.race_points (
+    point_id integer NOT NULL,
+    pilot_name character varying(50),
+    race_name character varying(50),
+    finish_position character varying(10),
+    points smallint
+);
+
+
+ALTER TABLE public.race_points OWNER TO postgres;
+
+--
+-- Name: race_points_point_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.race_points_point_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.race_points_point_id_seq OWNER TO postgres;
+
+--
+-- Name: race_points_point_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.race_points_point_id_seq OWNED BY public.race_points.point_id;
+
+
+--
+-- Name: race_winners; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.race_winners (
+    race_id integer NOT NULL,
+    race_name character varying(50),
+    winner_name character varying(100),
+    team character varying(100)
+);
+
+
+ALTER TABLE public.race_winners OWNER TO postgres;
+
+--
+-- Name: race_winners_race_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.race_winners_race_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.race_winners_race_id_seq OWNER TO postgres;
+
+--
+-- Name: race_winners_race_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.race_winners_race_id_seq OWNED BY public.race_winners.race_id;
+
+
+--
+-- Name: races_result; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.races_result (
+    result_id integer NOT NULL,
+    pilot_name character varying(50),
+    race_name character varying(20),
+    finish_position character varying(10),
+    half_points boolean DEFAULT false
+);
+
+
+ALTER TABLE public.races_result OWNER TO postgres;
+
+--
+-- Name: races_result_result_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.races_result_result_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.races_result_result_id_seq OWNER TO postgres;
+
+--
+-- Name: races_result_result_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.races_result_result_id_seq OWNED BY public.races_result.result_id;
+
+
+--
+-- Name: staging_grid_position; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.staging_grid_position (
+    report_id integer NOT NULL,
+    pilot_name character varying(50),
+    brazil character varying(10),
+    south_africa character varying(10),
+    belgium character varying(10),
+    san_marino character varying(10),
+    france character varying(10),
+    monaco character varying(10),
+    canada character varying(10),
+    detroit character varying(10),
+    dallas character varying(10),
+    britain character varying(10),
+    deutschland character varying(10),
+    austria character varying(10),
+    netherlands character varying(10),
+    italy character varying(10),
+    euro character varying(10),
+    portugal character varying(10)
+);
+
+
+ALTER TABLE public.staging_grid_position OWNER TO postgres;
+
+--
+-- Name: staging_grid_position_report_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.staging_grid_position_report_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.staging_grid_position_report_id_seq OWNER TO postgres;
+
+--
+-- Name: staging_grid_position_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.staging_grid_position_report_id_seq OWNED BY public.staging_grid_position.report_id;
+
+
+--
+-- Name: staging_laps_lead_pilots; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.staging_laps_lead_pilots (
+    lead_id integer NOT NULL,
+    pilot_name character varying(50),
+    laps_lead character varying(10)
+);
+
+
+ALTER TABLE public.staging_laps_lead_pilots OWNER TO postgres;
+
+--
+-- Name: staging_laps_lead_pilots_lead_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.staging_laps_lead_pilots_lead_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.staging_laps_lead_pilots_lead_id_seq OWNER TO postgres;
+
+--
+-- Name: staging_laps_lead_pilots_lead_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.staging_laps_lead_pilots_lead_id_seq OWNED BY public.staging_laps_lead_pilots.lead_id;
+
+
+--
+-- Name: staging_laps_raced_pilots; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.staging_laps_raced_pilots (
+    raced_id integer NOT NULL,
+    pilot_name character varying(50),
+    laps_raced character varying(10),
+    percentage character varying(10)
+);
+
+
+ALTER TABLE public.staging_laps_raced_pilots OWNER TO postgres;
+
+--
+-- Name: staging_laps_raced_pilots_raced_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.staging_laps_raced_pilots_raced_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.staging_laps_raced_pilots_raced_id_seq OWNER TO postgres;
+
+--
+-- Name: staging_laps_raced_pilots_raced_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.staging_laps_raced_pilots_raced_id_seq OWNED BY public.staging_laps_raced_pilots.raced_id;
+
+
+--
+-- Name: staging_pilots; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.staging_pilots (
+    pilot_id integer NOT NULL,
+    pilot_name character varying(50),
+    chassis character varying(30),
+    engine character varying(30),
+    best_result character varying(10),
+    best_grid_position character varying(10)
+);
+
+
+ALTER TABLE public.staging_pilots OWNER TO postgres;
+
+--
+-- Name: staging_pilots_pilot_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.staging_pilots_pilot_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.staging_pilots_pilot_id_seq OWNER TO postgres;
+
+--
+-- Name: staging_pilots_pilot_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.staging_pilots_pilot_id_seq OWNED BY public.staging_pilots.pilot_id;
+
+
+--
+-- Name: staging_races_result; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.staging_races_result (
+    report_id integer NOT NULL,
+    pilot_name character varying(50),
+    brazil character varying(10),
+    south_africa character varying(10),
+    belgium character varying(10),
+    san_marino character varying(10),
+    france character varying(10),
+    monaco character varying(10),
+    canada character varying(10),
+    detroit character varying(10),
+    dallas character varying(10),
+    britain character varying(10),
+    deutschland character varying(10),
+    austria character varying(10),
+    netherlands character varying(10),
+    italy character varying(10),
+    euro character varying(10),
+    portugal character varying(10)
+);
+
+
+ALTER TABLE public.staging_races_result OWNER TO postgres;
+
+--
+-- Name: staging_races_result_report_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.staging_races_result_report_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.staging_races_result_report_id_seq OWNER TO postgres;
+
+--
+-- Name: staging_races_result_report_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.staging_races_result_report_id_seq OWNED BY public.staging_races_result.report_id;
+
+
+--
+-- Name: constructor_report report_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.constructor_report ALTER COLUMN report_id SET DEFAULT nextval('public.constructor_report_report_id_seq'::regclass);
+
+
+--
+-- Name: grid_position position_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.grid_position ALTER COLUMN position_id SET DEFAULT nextval('public.grid_position_position_id_seq'::regclass);
+
+
+--
+-- Name: laps_efficiency efficiency_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.laps_efficiency ALTER COLUMN efficiency_id SET DEFAULT nextval('public.laps_efficiency_efficiency_id_seq'::regclass);
+
+
+--
+-- Name: laps_lead_stats_pilots stat_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.laps_lead_stats_pilots ALTER COLUMN stat_id SET DEFAULT nextval('public.laps_lead_stats_pilots_stat_id_seq'::regclass);
+
+
+--
+-- Name: laps_raced_stats_pilots stat_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.laps_raced_stats_pilots ALTER COLUMN stat_id SET DEFAULT nextval('public.laps_raced_stats_pilots_stat_id_seq'::regclass);
+
+
+--
+-- Name: pilot_stability stability_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pilot_stability ALTER COLUMN stability_id SET DEFAULT nextval('public.pilot_stability_stability_id_seq'::regclass);
+
+
+--
+-- Name: pilots_top win_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pilots_top ALTER COLUMN win_id SET DEFAULT nextval('public.pilots_top_win_id_seq'::regclass);
+
+
+--
+-- Name: pole_position_stats stat_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pole_position_stats ALTER COLUMN stat_id SET DEFAULT nextval('public.pole_position_stats_stat_id_seq'::regclass);
+
+
+--
+-- Name: race_points point_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.race_points ALTER COLUMN point_id SET DEFAULT nextval('public.race_points_point_id_seq'::regclass);
+
+
+--
+-- Name: race_winners race_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.race_winners ALTER COLUMN race_id SET DEFAULT nextval('public.race_winners_race_id_seq'::regclass);
+
+
+--
+-- Name: races_result result_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.races_result ALTER COLUMN result_id SET DEFAULT nextval('public.races_result_result_id_seq'::regclass);
+
+
+--
+-- Name: staging_grid_position report_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.staging_grid_position ALTER COLUMN report_id SET DEFAULT nextval('public.staging_grid_position_report_id_seq'::regclass);
+
+
+--
+-- Name: staging_laps_lead_pilots lead_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.staging_laps_lead_pilots ALTER COLUMN lead_id SET DEFAULT nextval('public.staging_laps_lead_pilots_lead_id_seq'::regclass);
+
+
+--
+-- Name: staging_laps_raced_pilots raced_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.staging_laps_raced_pilots ALTER COLUMN raced_id SET DEFAULT nextval('public.staging_laps_raced_pilots_raced_id_seq'::regclass);
+
+
+--
+-- Name: staging_pilots pilot_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.staging_pilots ALTER COLUMN pilot_id SET DEFAULT nextval('public.staging_pilots_pilot_id_seq'::regclass);
+
+
+--
+-- Name: staging_races_result report_id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.staging_races_result ALTER COLUMN report_id SET DEFAULT nextval('public.staging_races_result_report_id_seq'::regclass);
+
+
+--
+-- Data for Name: constructor_report; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.constructor_report (report_id, constructor_name, total_points, wins_count, poles_count, avg_finish_position, avg_start_position) FROM stdin;
+1	McLaren	143.50	12	3	1.90	4.98
+2	Ferrari	57.50	1	1	4.90	8.43
+3	Lotus	47.00	0	2	4.14	7.72
+4	Brabham	38.00	2	9	6.13	10.63
+5	Renault	34.00	0	1	4.94	6.11
+\.
+
+
+--
+-- Data for Name: grid_position; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.grid_position (position_id, pilot_name, race_name, starting_position) FROM stdin;
+1	Michele ALBORETO	BRAZIL	2
+2	Philippe ALLIOT	BRAZIL	25
+3	René ARNOUX	BRAZIL	10
+4	Mauro BALDI	BRAZIL	23
+5	Stefan BELLOF	BRAZIL	22
+6	Thierry BOUTSEN	BRAZIL	20
+7	Martin BRUNDLE	BRAZIL	18
+8	Johnny CECOTTO	BRAZIL	17
+9	Eddie CHEEVER	BRAZIL	12
+10	Elio De ANGELIS	BRAZIL	1
+11	Andrea De CESARIS	BRAZIL	14
+12	Teo FABI	BRAZIL	15
+13	Piercarlo GHINZANI	BRAZIL	21
+14	François HESNAULT	BRAZIL	19
+15	Jacques LAFFITE	BRAZIL	13
+16	Niki LAUDA	BRAZIL	6
+17	Nigel MANSELL	BRAZIL	5
+18	Jonathan PALMER	BRAZIL	26
+19	Riccardo PATRESE	BRAZIL	11
+20	Nelson PIQUET	BRAZIL	7
+21	Alain PROST	BRAZIL	4
+22	Keke ROSBERG	BRAZIL	9
+23	Ayrton SENNA	BRAZIL	16
+24	Marc SURER	BRAZIL	24
+25	Patrick TAMBAY	BRAZIL	8
+26	Derek WARWICK	BRAZIL	3
+27	Michele ALBORETO	SOUTH_AFRICA	10
+28	Philippe ALLIOT	SOUTH_AFRICA	22
+29	René ARNOUX	SOUTH_AFRICA	15
+30	Mauro BALDI	SOUTH_AFRICA	20
+31	Stefan BELLOF	SOUTH_AFRICA	24
+32	Thierry BOUTSEN	SOUTH_AFRICA	26
+33	Martin BRUNDLE	SOUTH_AFRICA	25
+34	Johnny CECOTTO	SOUTH_AFRICA	19
+35	Eddie CHEEVER	SOUTH_AFRICA	16
+36	Elio De ANGELIS	SOUTH_AFRICA	7
+37	Andrea De CESARIS	SOUTH_AFRICA	14
+38	Teo FABI	SOUTH_AFRICA	6
+39	François HESNAULT	SOUTH_AFRICA	17
+40	Jacques LAFFITE	SOUTH_AFRICA	11
+41	Niki LAUDA	SOUTH_AFRICA	8
+42	Nigel MANSELL	SOUTH_AFRICA	3
+43	Jonathan PALMER	SOUTH_AFRICA	21
+44	Riccardo PATRESE	SOUTH_AFRICA	18
+45	Nelson PIQUET	SOUTH_AFRICA	1
+46	Alain PROST	SOUTH_AFRICA	5
+47	Keke ROSBERG	SOUTH_AFRICA	2
+48	Ayrton SENNA	SOUTH_AFRICA	13
+49	Marc SURER	SOUTH_AFRICA	23
+50	Patrick TAMBAY	SOUTH_AFRICA	4
+51	Derek WARWICK	SOUTH_AFRICA	9
+52	Manfred WINKELHOCK	SOUTH_AFRICA	12
+53	Michele ALBORETO	BELGIUM	1
+54	René ARNOUX	BELGIUM	2
+55	Mauro BALDI	BELGIUM	25
+56	Stefan BELLOF	BELGIUM	21
+57	Thierry BOUTSEN	BELGIUM	17
+58	Martin BRUNDLE	BELGIUM	22
+59	Johnny CECOTTO	BELGIUM	16
+60	Eddie CHEEVER	BELGIUM	11
+61	Elio De ANGELIS	BELGIUM	5
+62	Andrea De CESARIS	BELGIUM	13
+63	Teo FABI	BELGIUM	18
+64	Piercarlo GHINZANI	BELGIUM	20
+65	François HESNAULT	BELGIUM	23
+66	Jacques LAFFITE	BELGIUM	15
+67	Niki LAUDA	BELGIUM	14
+68	Nigel MANSELL	BELGIUM	10
+69	Jonathan PALMER	BELGIUM	26
+70	Riccardo PATRESE	BELGIUM	7
+71	Nelson PIQUET	BELGIUM	9
+72	Alain PROST	BELGIUM	8
+73	Keke ROSBERG	BELGIUM	3
+74	Ayrton SENNA	BELGIUM	19
+75	Marc SURER	BELGIUM	24
+76	Patrick TAMBAY	BELGIUM	12
+77	Derek WARWICK	BELGIUM	4
+78	Manfred WINKELHOCK	BELGIUM	6
+79	Michele ALBORETO	SAN_MARINO	13
+80	Philippe ALLIOT	SAN_MARINO	23
+81	René ARNOUX	SAN_MARINO	6
+82	Mauro BALDI	SAN_MARINO	24
+83	Stefan BELLOF	SAN_MARINO	21
+84	Thierry BOUTSEN	SAN_MARINO	20
+85	Martin BRUNDLE	SAN_MARINO	22
+86	Johnny CECOTTO	SAN_MARINO	19
+87	Eddie CHEEVER	SAN_MARINO	8
+88	Elio De ANGELIS	SAN_MARINO	11
+89	Andrea De CESARIS	SAN_MARINO	12
+90	Teo FABI	SAN_MARINO	9
+91	Jo GARTNER	SAN_MARINO	26
+92	François HESNAULT	SAN_MARINO	17
+93	Jacques LAFFITE	SAN_MARINO	15
+94	Niki LAUDA	SAN_MARINO	5
+95	Nigel MANSELL	SAN_MARINO	18
+96	Jonathan PALMER	SAN_MARINO	25
+97	Riccardo PATRESE	SAN_MARINO	10
+98	Nelson PIQUET	SAN_MARINO	1
+99	Alain PROST	SAN_MARINO	2
+100	Keke ROSBERG	SAN_MARINO	3
+101	Marc SURER	SAN_MARINO	16
+102	Patrick TAMBAY	SAN_MARINO	14
+103	Derek WARWICK	SAN_MARINO	4
+104	Manfred WINKELHOCK	SAN_MARINO	7
+105	Michele ALBORETO	FRANCE	10
+106	Philippe ALLIOT	FRANCE	22
+107	René ARNOUX	FRANCE	11
+108	Mauro BALDI	FRANCE	24
+109	Stefan BELLOF	FRANCE	20
+110	Thierry BOUTSEN	FRANCE	14
+111	Martin BRUNDLE	FRANCE	23
+112	Johnny CECOTTO	FRANCE	18
+113	Eddie CHEEVER	FRANCE	16
+114	Elio De ANGELIS	FRANCE	2
+115	Andrea De CESARIS	FRANCE	26
+116	Teo FABI	FRANCE	17
+117	Piercarlo GHINZANI	FRANCE	25
+118	Jacques LAFFITE	FRANCE	12
+119	Niki LAUDA	FRANCE	9
+120	Nigel MANSELL	FRANCE	6
+121	Jonathan PALMER	FRANCE	21
+122	Riccardo PATRESE	FRANCE	15
+123	Nelson PIQUET	FRANCE	3
+124	Alain PROST	FRANCE	5
+125	Keke ROSBERG	FRANCE	4
+126	Ayrton SENNA	FRANCE	13
+127	Marc SURER	FRANCE	19
+128	Patrick TAMBAY	FRANCE	1
+129	Derek WARWICK	FRANCE	7
+130	Manfred WINKELHOCK	FRANCE	8
+131	Michele ALBORETO	MONACO	4
+132	René ARNOUX	MONACO	3
+133	Stefan BELLOF	MONACO	20
+134	Johnny CECOTTO	MONACO	18
+135	Elio De ANGELIS	MONACO	11
+136	Andrea De CESARIS	MONACO	7
+137	Corrado FABI	MONACO	15
+138	Piercarlo GHINZANI	MONACO	19
+139	François HESNAULT	MONACO	17
+140	Jacques LAFFITE	MONACO	16
+141	Niki LAUDA	MONACO	8
+142	Nigel MANSELL	MONACO	2
+143	Riccardo PATRESE	MONACO	14
+144	Nelson PIQUET	MONACO	9
+145	Alain PROST	MONACO	1
+146	Keke ROSBERG	MONACO	10
+147	Ayrton SENNA	MONACO	13
+148	Patrick TAMBAY	MONACO	6
+149	Derek WARWICK	MONACO	5
+150	Manfred WINKELHOCK	MONACO	12
+151	Michele ALBORETO	CANADA	6
+152	Philippe ALLIOT	CANADA	26
+153	René ARNOUX	CANADA	5
+154	Stefan BELLOF	CANADA	22
+155	Thierry BOUTSEN	CANADA	18
+156	Martin BRUNDLE	CANADA	21
+157	Johnny CECOTTO	CANADA	20
+158	Eddie CHEEVER	CANADA	11
+159	Elio De ANGELIS	CANADA	3
+160	Andrea De CESARIS	CANADA	10
+161	Corrado FABI	CANADA	16
+162	Piercarlo GHINZANI	CANADA	19
+163	François HESNAULT	CANADA	13
+164	Jacques LAFFITE	CANADA	17
+165	Niki LAUDA	CANADA	8
+166	Nigel MANSELL	CANADA	7
+167	Riccardo PATRESE	CANADA	14
+168	Nelson PIQUET	CANADA	1
+169	Alain PROST	CANADA	2
+170	Keke ROSBERG	CANADA	15
+171	Huub ROTHENGATTER	CANADA	24
+172	Ayrton SENNA	CANADA	9
+173	Marc SURER	CANADA	23
+174	Mike THACKWELL	CANADA	25
+175	Derek WARWICK	CANADA	4
+176	Manfred WINKELHOCK	CANADA	12
+177	Michele ALBORETO	DETROIT	4
+178	Philippe ALLIOT	DETROIT	20
+179	René ARNOUX	DETROIT	15
+180	Stefan BELLOF	DETROIT	16
+181	Thierry BOUTSEN	DETROIT	13
+182	Martin BRUNDLE	DETROIT	11
+183	Johnny CECOTTO	DETROIT	17
+184	Eddie CHEEVER	DETROIT	8
+185	Elio De ANGELIS	DETROIT	5
+186	Andrea De CESARIS	DETROIT	12
+187	Teo FABI	DETROIT	23
+188	Piercarlo GHINZANI	DETROIT	26
+189	François HESNAULT	DETROIT	18
+190	Jacques LAFFITE	DETROIT	19
+191	Niki LAUDA	DETROIT	10
+192	Nigel MANSELL	DETROIT	3
+193	Jonathan PALMER	DETROIT	24
+194	Riccardo PATRESE	DETROIT	25
+195	Nelson PIQUET	DETROIT	1
+196	Alain PROST	DETROIT	2
+197	Keke ROSBERG	DETROIT	21
+198	Ayrton SENNA	DETROIT	7
+199	Marc SURER	DETROIT	22
+200	Patrick TAMBAY	DETROIT	9
+201	Derek WARWICK	DETROIT	6
+202	Manfred WINKELHOCK	DETROIT	14
+203	Michele ALBORETO	DALLAS	9
+204	René ARNOUX	DALLAS	4
+205	Stefan BELLOF	DALLAS	17
+206	Thierry BOUTSEN	DALLAS	20
+207	Johnny CECOTTO	DALLAS	15
+208	Eddie CHEEVER	DALLAS	14
+209	Elio De ANGELIS	DALLAS	2
+210	Andrea De CESARIS	DALLAS	16
+211	Corrado FABI	DALLAS	11
+212	Piercarlo GHINZANI	DALLAS	18
+213	François HESNAULT	DALLAS	19
+214	Jacques LAFFITE	DALLAS	24
+215	Niki LAUDA	DALLAS	5
+216	Nigel MANSELL	DALLAS	1
+217	Jonathan PALMER	DALLAS	25
+218	Riccardo PATRESE	DALLAS	21
+219	Nelson PIQUET	DALLAS	12
+220	Alain PROST	DALLAS	7
+221	Keke ROSBERG	DALLAS	8
+222	Huub ROTHENGATTER	DALLAS	23
+223	Ayrton SENNA	DALLAS	6
+224	Marc SURER	DALLAS	22
+225	Patrick TAMBAY	DALLAS	10
+226	Derek WARWICK	DALLAS	3
+227	Manfred WINKELHOCK	DALLAS	13
+228	Michele ALBORETO	BRITAIN	9
+229	Philippe ALLIOT	BRITAIN	24
+230	René ARNOUX	BRITAIN	13
+231	Stefan BELLOF	BRITAIN	26
+232	Thierry BOUTSEN	BRITAIN	12
+233	Eddie CHEEVER	BRITAIN	18
+234	Elio De ANGELIS	BRITAIN	4
+235	Andrea De CESARIS	BRITAIN	19
+236	Teo FABI	BRITAIN	14
+237	Jo GARTNER	BRITAIN	27
+238	Piercarlo GHINZANI	BRITAIN	21
+239	François HESNAULT	BRITAIN	20
+240	Stefan JOHANSSON	BRITAIN	25
+241	Jacques LAFFITE	BRITAIN	16
+242	Niki LAUDA	BRITAIN	3
+243	Nigel MANSELL	BRITAIN	8
+244	Jonathan PALMER	BRITAIN	23
+245	Riccardo PATRESE	BRITAIN	17
+246	Nelson PIQUET	BRITAIN	1
+247	Alain PROST	BRITAIN	2
+248	Keke ROSBERG	BRITAIN	5
+249	Huub ROTHENGATTER	BRITAIN	22
+250	Ayrton SENNA	BRITAIN	7
+251	Marc SURER	BRITAIN	15
+252	Patrick TAMBAY	BRITAIN	10
+253	Derek WARWICK	BRITAIN	6
+254	Manfred WINKELHOCK	BRITAIN	11
+255	Michele ALBORETO	DEUTSCHLAND	6
+256	Philippe ALLIOT	DEUTSCHLAND	22
+257	René ARNOUX	DEUTSCHLAND	10
+258	Thierry BOUTSEN	DEUTSCHLAND	15
+259	Eddie CHEEVER	DEUTSCHLAND	18
+260	Elio De ANGELIS	DEUTSCHLAND	2
+261	Andrea De CESARIS	DEUTSCHLAND	11
+262	Teo FABI	DEUTSCHLAND	8
+263	Jo GARTNER	DEUTSCHLAND	23
+264	Piercarlo GHINZANI	DEUTSCHLAND	21
+265	François HESNAULT	DEUTSCHLAND	17
+266	Stefan JOHANSSON	DEUTSCHLAND	26
+267	Jacques LAFFITE	DEUTSCHLAND	12
+268	Niki LAUDA	DEUTSCHLAND	7
+269	Nigel MANSELL	DEUTSCHLAND	16
+270	Jonathan PALMER	DEUTSCHLAND	25
+271	Riccardo PATRESE	DEUTSCHLAND	20
+272	Nelson PIQUET	DEUTSCHLAND	5
+273	Alain PROST	DEUTSCHLAND	1
+274	Keke ROSBERG	DEUTSCHLAND	19
+275	Huub ROTHENGATTER	DEUTSCHLAND	24
+276	Ayrton SENNA	DEUTSCHLAND	9
+277	Marc SURER	DEUTSCHLAND	14
+278	Patrick TAMBAY	DEUTSCHLAND	4
+279	Derek WARWICK	DEUTSCHLAND	3
+280	Manfred WINKELHOCK	DEUTSCHLAND	13
+281	Michele ALBORETO	AUSTRIA	12
+282	Philippe ALLIOT	AUSTRIA	25
+283	René ARNOUX	AUSTRIA	15
+284	Gerhard BERGER	AUSTRIA	20
+285	Thierry BOUTSEN	AUSTRIA	17
+286	Eddie CHEEVER	AUSTRIA	16
+287	Elio De ANGELIS	AUSTRIA	3
+288	Andrea De CESARIS	AUSTRIA	18
+289	Teo FABI	AUSTRIA	7
+290	Jo GARTNER	AUSTRIA	22
+291	Piercarlo GHINZANI	AUSTRIA	23
+292	François HESNAULT	AUSTRIA	21
+293	Jacques LAFFITE	AUSTRIA	11
+294	Niki LAUDA	AUSTRIA	4
+295	Nigel MANSELL	AUSTRIA	8
+296	Jonathan PALMER	AUSTRIA	24
+297	Riccardo PATRESE	AUSTRIA	13
+298	Nelson PIQUET	AUSTRIA	1
+299	Alain PROST	AUSTRIA	2
+300	Keke ROSBERG	AUSTRIA	9
+301	Huub ROTHENGATTER	AUSTRIA	26
+302	Ayrton SENNA	AUSTRIA	10
+303	Marc SURER	AUSTRIA	19
+304	Patrick TAMBAY	AUSTRIA	5
+305	Derek WARWICK	AUSTRIA	6
+306	Manfred WINKELHOCK	AUSTRIA	14
+307	Michele ALBORETO	NETHERLANDS	9
+308	Philippe ALLIOT	NETHERLANDS	26
+309	René ARNOUX	NETHERLANDS	15
+310	Stefan BELLOF	NETHERLANDS	24
+311	Thierry BOUTSEN	NETHERLANDS	11
+312	Eddie CHEEVER	NETHERLANDS	17
+313	Elio De ANGELIS	NETHERLANDS	3
+314	Andrea De CESARIS	NETHERLANDS	14
+315	Teo FABI	NETHERLANDS	10
+316	Jo GARTNER	NETHERLANDS	23
+317	Piercarlo GHINZANI	NETHERLANDS	21
+318	François HESNAULT	NETHERLANDS	20
+319	Stefan JOHANSSON	NETHERLANDS	25
+320	Jacques LAFFITE	NETHERLANDS	8
+321	Niki LAUDA	NETHERLANDS	6
+322	Nigel MANSELL	NETHERLANDS	12
+323	Jonathan PALMER	NETHERLANDS	22
+324	Riccardo PATRESE	NETHERLANDS	18
+325	Nelson PIQUET	NETHERLANDS	2
+326	Alain PROST	NETHERLANDS	1
+327	Keke ROSBERG	NETHERLANDS	7
+328	Huub ROTHENGATTER	NETHERLANDS	27
+329	Ayrton SENNA	NETHERLANDS	13
+330	Marc SURER	NETHERLANDS	19
+331	Patrick TAMBAY	NETHERLANDS	5
+332	Derek WARWICK	NETHERLANDS	4
+333	Manfred WINKELHOCK	NETHERLANDS	16
+334	Michele ALBORETO	ITALY	11
+335	Philippe ALLIOT	ITALY	23
+336	René ARNOUX	ITALY	14
+337	Gerhard BERGER	ITALY	20
+338	Thierry BOUTSEN	ITALY	19
+339	Eddie CHEEVER	ITALY	10
+340	Elio De ANGELIS	ITALY	3
+341	Andrea De CESARIS	ITALY	16
+342	Teo FABI	ITALY	5
+343	Jo GARTNER	ITALY	24
+344	Piercarlo GHINZANI	ITALY	22
+345	François HESNAULT	ITALY	18
+346	Stefan JOHANSSON	ITALY	17
+347	Jacques LAFFITE	ITALY	13
+348	Niki LAUDA	ITALY	4
+349	Nigel MANSELL	ITALY	7
+350	Jonathan PALMER	ITALY	26
+351	Riccardo PATRESE	ITALY	9
+352	Nelson PIQUET	ITALY	1
+353	Alain PROST	ITALY	2
+354	Keke ROSBERG	ITALY	6
+355	Huub ROTHENGATTER	ITALY	25
+356	Marc SURER	ITALY	15
+357	Patrick TAMBAY	ITALY	8
+358	Derek WARWICK	ITALY	12
+359	Manfred WINKELHOCK	ITALY	21
+360	Michele ALBORETO	EURO	5
+361	Philippe ALLIOT	EURO	25
+362	René ARNOUX	EURO	6
+363	Mauro BALDI	EURO	24
+364	Gerhard BERGER	EURO	18
+365	Thierry BOUTSEN	EURO	11
+366	Eddie CHEEVER	EURO	13
+367	Elio De ANGELIS	EURO	23
+368	Andrea De CESARIS	EURO	17
+369	Teo FABI	EURO	10
+370	Jo GARTNER	EURO	22
+371	Piercarlo GHINZANI	EURO	20
+372	François HESNAULT	EURO	19
+373	Stefan JOHANSSON	EURO	26
+374	Jacques LAFFITE	EURO	14
+375	Niki LAUDA	EURO	15
+376	Nigel MANSELL	EURO	8
+377	Jonathan PALMER	EURO	21
+378	Riccardo PATRESE	EURO	9
+379	Nelson PIQUET	EURO	1
+380	Alain PROST	EURO	2
+381	Keke ROSBERG	EURO	4
+382	Ayrton SENNA	EURO	12
+383	Marc SURER	EURO	16
+384	Patrick TAMBAY	EURO	3
+385	Derek WARWICK	EURO	7
+386	Michele ALBORETO	PORTUGAL	8
+387	Philippe ALLIOT	PORTUGAL	27
+388	René ARNOUX	PORTUGAL	17
+389	Mauro BALDI	PORTUGAL	25
+390	Gerhard BERGER	PORTUGAL	23
+391	Thierry BOUTSEN	PORTUGAL	18
+392	Eddie CHEEVER	PORTUGAL	14
+393	Elio De ANGELIS	PORTUGAL	5
+394	Andrea De CESARIS	PORTUGAL	20
+395	Jo GARTNER	PORTUGAL	24
+396	Piercarlo GHINZANI	PORTUGAL	22
+397	François HESNAULT	PORTUGAL	21
+398	Stefan JOHANSSON	PORTUGAL	10
+399	Jacques LAFFITE	PORTUGAL	15
+400	Niki LAUDA	PORTUGAL	11
+401	Nigel MANSELL	PORTUGAL	6
+402	Jonathan PALMER	PORTUGAL	26
+403	Riccardo PATRESE	PORTUGAL	12
+404	Nelson PIQUET	PORTUGAL	1
+405	Alain PROST	PORTUGAL	2
+406	Keke ROSBERG	PORTUGAL	4
+407	Ayrton SENNA	PORTUGAL	3
+408	Philippe STREIFF	PORTUGAL	13
+409	Marc SURER	PORTUGAL	16
+410	Patrick TAMBAY	PORTUGAL	7
+411	Derek WARWICK	PORTUGAL	9
+412	Manfred WINKELHOCK	PORTUGAL	19
+\.
+
+
+--
+-- Data for Name: laps_efficiency; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.laps_efficiency (efficiency_id, pilot_name, laps_led, laps_raced, led_percentage) FROM stdin;
+1	A.PROST	345	819.00	42.00
+2	N.PIQUET	241	683.00	35.00
+3	N.LAUDA	168	853.00	20.00
+4	M.ALBORETO	81	682.00	12.00
+5	P.TAMBAY	74	714.00	10.00
+6	N.MANSELL	40	642.00	6.00
+7	K.ROSBERG	33	583.00	6.00
+8	D.WARWICK	12	712.00	2.00
+9	E.De ANGELIS	7	853.00	1.00
+\.
+
+
+--
+-- Data for Name: laps_lead_stats_pilots; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.laps_lead_stats_pilots (stat_id, pilot_name, laps_lead) FROM stdin;
+1	A.PROST	345.00
+2	N.PIQUET	241.00
+3	N.LAUDA	168.00
+4	M.ALBORETO	81.00
+5	P.TAMBAY	74.00
+6	N.MANSELL	40.00
+7	K.ROSBERG	33.00
+8	D.WARWICK	12.00
+9	E.De ANGELIS	7.00
+\.
+
+
+--
+-- Data for Name: laps_raced_stats_pilots; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.laps_raced_stats_pilots (stat_id, pilot_name, laps_raced, percentage) FROM stdin;
+1	E.De ANGELIS	853.00	85.21
+2	N.LAUDA	853.00	85.21
+3	A.PROST	819.00	81.82
+4	R.ARNOUX	817.00	81.62
+5	P.TAMBAY	714.00	71.33
+6	D.WARWICK	712.00	71.13
+7	N.PIQUET	683.00	68.23
+8	M.ALBORETO	682.00	68.13
+9	T.BOUTSEN	674.00	67.33
+10	A.De CESARIS	669.00	66.83
+11	N.MANSELL	642.00	64.14
+12	R.PATRESE	596.00	59.54
+13	M.SURER	588.00	58.74
+14	K.ROSBERG	583.00	58.24
+15	E.CHEEVER	551.00	55.04
+16	A.SENNA	549.00	54.85
+17	T.FABI	539.00	53.85
+18	J.PALMER	532.00	53.15
+19	J.LAFFITE	530.00	52.95
+20	S.BELLOF	472.00	47.15
+21	M.BRUNDLE	444.00	44.36
+22	F.HESNAULT	439.00	43.86
+23	P.GHINZANI	427.00	42.66
+24	M.WINKELHOCK	412.00	41.16
+25	M.BALDI	386.00	38.56
+26	P.ALLIOT	370.00	36.96
+27	J.GARTNER	305.00	30.47
+28	H.ROTHENGATTER	297.00	29.67
+29	S.JOHANSSON	246.00	24.58
+30	J.CECOTTO	236.00	23.58
+31	G.BERGER	165.00	16.48
+32	C.FABI	112.00	11.19
+33	P.STREIFF	48.00	4.80
+34	M.THACKWELL	29.00	2.90
+\.
+
+
+--
+-- Data for Name: pilot_stability; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.pilot_stability (stability_id, pilot_name, avg_finish_position, avg_start_position, avg_progress, races_count) FROM stdin;
+1	Niki LAUDA	1.70	7.50	5.80	10
+2	Alain PROST	2.09	2.45	0.36	11
+3	Nigel MANSELL	4.00	10.25	6.25	4
+4	Nelson PIQUET	4.14	2.14	-2.00	7
+5	Derek WARWICK	4.17	5.50	1.33	6
+6	Michele ALBORETO	4.25	7.50	3.25	8
+7	Elio De ANGELIS	4.27	5.18	0.91	11
+8	Ayrton SENNA	4.50	10.67	6.17	6
+9	Keke ROSBERG	4.80	6.60	1.80	5
+10	Teo FABI	5.25	14.25	9.00	4
+11	René ARNOUX	5.55	9.36	3.82	11
+12	Patrick TAMBAY	5.71	6.71	1.00	7
+13	Riccardo PATRESE	7.17	13.00	5.83	6
+14	Stefan JOHANSSON	7.50	13.50	6.00	2
+15	Andrea De CESARIS	8.14	17.00	8.86	7
+16	Marc SURER	8.20	21.00	12.80	5
+17	Thierry BOUTSEN	8.29	18.14	9.86	7
+18	Huub ROTHENGATTER	8.50	24.50	16.00	2
+19	François HESNAULT	8.60	18.80	10.20	5
+20	Jacques LAFFITE	8.75	15.50	6.75	4
+21	Piercarlo GHINZANI	8.75	21.75	13.00	4
+22	Johnny CECOTTO	9.00	20.00	11.00	1
+23	Manfred WINKELHOCK	9.00	15.50	6.50	2
+24	Jonathan PALMER	9.67	24.00	14.33	6
+25	Mauro BALDI	9.75	23.25	13.50	4
+26	Eddie CHEEVER	10.17	12.00	1.83	6
+27	Philippe ALLIOT	10.33	25.67	15.33	3
+28	Gerhard BERGER	10.33	21.00	10.67	3
+29	Jo GARTNER	11.25	23.25	12.00	4
+\.
+
+
+--
+-- Data for Name: pilots; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.pilots (pilot_id, pilot_name, chassis, engine, best_result, best_grid_position) FROM stdin;
+1	Michele ALBORETO	Ferrari	Ferrari	1	1
+2	Philippe ALLIOT	RAM	Hart	10	20
+3	René ARNOUX	Ferrari	Ferrari	2	2
+4	Mauro BALDI	Spirit	Hart	8	20
+5	Stefan BELLOF	Tyrrell	Ford Cosworth	\N	16
+6	Stefan BELLOF	McLaren	TAG Porsche	\N	\N
+7	Gerhard BERGER	ATS	BMW	6	18
+8	Thierry BOUTSEN	Arrows	Ford Cosworth	5	20
+9	Thierry BOUTSEN	Arrows	BMW	5	11
+10	Martin BRUNDLE	Tyrrell	Ford Cosworth	\N	11
+11	Johnny CECOTTO	Toleman	Hart	9	15
+12	Eddie CHEEVER	Alfa Romeo	Alfa Romeo	4	8
+13	Elio De ANGELIS	Lotus	Renault	2	1
+14	Andrea De CESARIS	Ligier	Renault	5	7
+15	Corrado FABI	Brabham	BMW	7	11
+16	Teo FABI	Brabham	BMW	3	5
+17	Pascal FABRE	Spirit	Hart	\N	\N
+18	Jo GARTNER	Osella	Alfa Romeo	5	22
+19	Piercarlo GHINZANI	Osella	Alfa Romeo	5	18
+20	François HESNAULT	Ligier	Renault	7	13
+21	Stefan JOHANSSON	Tyrrell	Ford Cosworth	\N	25
+22	Stefan JOHANSSON	Toleman	Hart	4	10
+23	Jacques LAFFITE	Williams	Honda	4	8
+24	Niki LAUDA	McLaren	TAG Porsche	1	3
+25	Nigel MANSELL	Lotus	Renault	3	1
+26	Pierluigi MARTINI	Toleman	Hart	\N	\N
+27	Jonathan PALMER	RAM	Hart	8	21
+28	Riccardo PATRESE	Alfa Romeo	Alfa Romeo	3	7
+29	Nelson PIQUET	Brabham	BMW	1	1
+30	Alain PROST	McLaren	TAG Porsche	1	1
+31	Keke ROSBERG	Williams	Honda	1	2
+32	Huub ROTHENGATTER	Spirit	Hart	8	22
+33	Huub ROTHENGATTER	Spirit	Ford Cosworth	\N	\N
+34	Ayrton SENNA	Toleman	Hart	2	3
+35	Philippe STREIFF	Renault	Renault	\N	13
+36	Marc SURER	Arrows	Ford Cosworth	7	19
+37	Marc SURER	Arrows	BMW	6	14
+38	Patrick TAMBAY	Renault	Renault	2	1
+39	Mike THACKWELL	RAM	Hart	\N	25
+40	Mike THACKWELL	Tyrrell	Ford Cosworth	\N	\N
+41	Derek WARWICK	Renault	Renault	2	3
+42	Manfred WINKELHOCK	ATS	BMW	8	6
+43	Manfred WINKELHOCK	Brabham	BMW	10	19
+44	Manfred WINKELHOCK	NaN	NaN	NaN	NaN
+\.
+
+
+--
+-- Data for Name: pilots_top; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.pilots_top (win_id, pilot_name, total_points, wins_count, podiums) FROM stdin;
+1	Niki LAUDA	72.00	5	9
+2	Alain PROST	71.50	7	9
+3	Elio De ANGELIS	34.00	0	4
+4	Michele ALBORETO	30.50	1	4
+5	Nelson PIQUET	29.00	2	4
+6	René ARNOUX	27.00	0	4
+7	Derek WARWICK	23.00	0	4
+8	Keke ROSBERG	20.50	1	2
+9	Ayrton SENNA	13.00	0	3
+10	Nigel MANSELL	13.00	0	2
+11	Patrick TAMBAY	11.00	0	1
+12	Teo FABI	9.00	0	1
+13	Riccardo PATRESE	8.00	0	1
+14	Jacques LAFFITE	5.00	0	0
+15	Thierry BOUTSEN	5.00	0	0
+16	Andrea De CESARIS	3.00	0	0
+17	Stefan JOHANSSON	3.00	0	0
+18	Eddie CHEEVER	3.00	0	0
+19	Jo GARTNER	2.00	0	0
+20	Piercarlo GHINZANI	2.00	0	0
+21	Marc SURER	1.00	0	0
+22	Gerhard BERGER	1.00	0	0
+23	Mario ANDRETTI	0.00	0	0
+24	Mauro BALDI	0.00	0	0
+25	Pascal FABRE	0.00	0	0
+26	Corrado FABI	0.00	0	0
+27	Mike THACKWELL	0.00	0	0
+28	Philippe ALLIOT	0.00	0	0
+29	Johnny CECOTTO	0.00	0	0
+30	Stefan BELLOF	0.00	0	0
+31	François HESNAULT	0.00	0	0
+32	Huub ROTHENGATTER	0.00	0	0
+33	Martin BRUNDLE	0.00	0	0
+34	Jonathan PALMER	0.00	0	0
+35	Manfred WINKELHOCK	0.00	0	0
+36	Pierluigi MARTINI	0.00	0	0
+37	Philippe STREIFF	0.00	0	0
+\.
+
+
+--
+-- Data for Name: pole_position_stats; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.pole_position_stats (stat_id, pilot_name, pole_count, avg_starting_position) FROM stdin;
+1	Nelson PIQUET	9	3.50
+2	Alain PROST	3	3.00
+3	Elio De ANGELIS	1	5.60
+4	Patrick TAMBAY	1	7.10
+5	Michele ALBORETO	1	7.40
+6	Nigel MANSELL	1	7.50
+\.
+
+
+--
+-- Data for Name: race_points; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.race_points (point_id, pilot_name, race_name, finish_position, points) FROM stdin;
+1	Michele ALBORETO	BRAZIL	ab	0
+2	Philippe ALLIOT	BRAZIL	ab	0
+3	René ARNOUX	BRAZIL	ab	0
+4	Mauro BALDI	BRAZIL	ab	0
+5	Stefan BELLOF	BRAZIL	dsq	0
+6	Thierry BOUTSEN	BRAZIL	6	1
+7	Martin BRUNDLE	BRAZIL	dsq	0
+8	Johnny CECOTTO	BRAZIL	ab	0
+9	Eddie CHEEVER	BRAZIL	4	3
+10	Elio De ANGELIS	BRAZIL	3	4
+11	Andrea De CESARIS	BRAZIL	ab	0
+12	Teo FABI	BRAZIL	ab	0
+13	Piercarlo GHINZANI	BRAZIL	ab	0
+14	François HESNAULT	BRAZIL	ab	0
+15	Jacques LAFFITE	BRAZIL	ab	0
+16	Niki LAUDA	BRAZIL	ab	0
+17	Nigel MANSELL	BRAZIL	ab	0
+18	Jonathan PALMER	BRAZIL	8	0
+19	Riccardo PATRESE	BRAZIL	ab	0
+20	Nelson PIQUET	BRAZIL	ab	0
+21	Alain PROST	BRAZIL	1	9
+22	Keke ROSBERG	BRAZIL	2	6
+23	Ayrton SENNA	BRAZIL	ab	0
+24	Marc SURER	BRAZIL	7	0
+25	Patrick TAMBAY	BRAZIL	5	2
+26	Derek WARWICK	BRAZIL	ab	0
+27	Manfred WINKELHOCK	BRAZIL	exc	0
+28	Michele ALBORETO	SOUTH_AFRICA	11	0
+29	Philippe ALLIOT	SOUTH_AFRICA	ab	0
+30	René ARNOUX	SOUTH_AFRICA	ab	0
+31	Mauro BALDI	SOUTH_AFRICA	8	0
+32	Stefan BELLOF	SOUTH_AFRICA	dsq	0
+33	Thierry BOUTSEN	SOUTH_AFRICA	12	0
+34	Martin BRUNDLE	SOUTH_AFRICA	dsq	0
+35	Johnny CECOTTO	SOUTH_AFRICA	ab	0
+36	Eddie CHEEVER	SOUTH_AFRICA	ab	0
+37	Elio De ANGELIS	SOUTH_AFRICA	7	0
+38	Andrea De CESARIS	SOUTH_AFRICA	5	2
+39	Teo FABI	SOUTH_AFRICA	ab	0
+40	Piercarlo GHINZANI	SOUTH_AFRICA	np	0
+41	François HESNAULT	SOUTH_AFRICA	10	0
+42	Jacques LAFFITE	SOUTH_AFRICA	ab	0
+43	Niki LAUDA	SOUTH_AFRICA	1	9
+44	Nigel MANSELL	SOUTH_AFRICA	ab	0
+45	Jonathan PALMER	SOUTH_AFRICA	ab	0
+46	Riccardo PATRESE	SOUTH_AFRICA	4	3
+47	Nelson PIQUET	SOUTH_AFRICA	ab	0
+48	Alain PROST	SOUTH_AFRICA	2	6
+49	Keke ROSBERG	SOUTH_AFRICA	ab	0
+50	Ayrton SENNA	SOUTH_AFRICA	6	1
+51	Marc SURER	SOUTH_AFRICA	9	0
+52	Patrick TAMBAY	SOUTH_AFRICA	ab	0
+53	Derek WARWICK	SOUTH_AFRICA	3	4
+54	Manfred WINKELHOCK	SOUTH_AFRICA	ab	0
+55	Michele ALBORETO	BELGIUM	1	9
+56	Philippe ALLIOT	BELGIUM	nq	0
+57	René ARNOUX	BELGIUM	3	4
+58	Mauro BALDI	BELGIUM	ab	0
+59	Stefan BELLOF	BELGIUM	dsq	0
+60	Thierry BOUTSEN	BELGIUM	ab	0
+61	Martin BRUNDLE	BELGIUM	dsq	0
+62	Johnny CECOTTO	BELGIUM	ab	0
+63	Eddie CHEEVER	BELGIUM	ab	0
+64	Elio De ANGELIS	BELGIUM	5	2
+65	Andrea De CESARIS	BELGIUM	ab	0
+66	Teo FABI	BELGIUM	ab	0
+67	Piercarlo GHINZANI	BELGIUM	ab	0
+68	François HESNAULT	BELGIUM	ab	0
+69	Jacques LAFFITE	BELGIUM	ab	0
+70	Niki LAUDA	BELGIUM	ab	0
+71	Nigel MANSELL	BELGIUM	ab	0
+72	Jonathan PALMER	BELGIUM	10	0
+73	Riccardo PATRESE	BELGIUM	ab	0
+74	Nelson PIQUET	BELGIUM	9	0
+75	Alain PROST	BELGIUM	ab	0
+76	Keke ROSBERG	BELGIUM	4	3
+77	Ayrton SENNA	BELGIUM	6	1
+78	Marc SURER	BELGIUM	8	0
+79	Patrick TAMBAY	BELGIUM	7	0
+80	Derek WARWICK	BELGIUM	2	6
+81	Manfred WINKELHOCK	BELGIUM	ab	0
+82	Michele ALBORETO	SAN_MARINO	ab	0
+83	Philippe ALLIOT	SAN_MARINO	ab	0
+84	René ARNOUX	SAN_MARINO	2	6
+85	Mauro BALDI	SAN_MARINO	8	0
+86	Stefan BELLOF	SAN_MARINO	dsq	0
+87	Thierry BOUTSEN	SAN_MARINO	5	2
+88	Martin BRUNDLE	SAN_MARINO	dsq	0
+89	Johnny CECOTTO	SAN_MARINO	ab	0
+90	Eddie CHEEVER	SAN_MARINO	7	0
+91	Elio De ANGELIS	SAN_MARINO	3	4
+92	Andrea De CESARIS	SAN_MARINO	6	1
+93	Teo FABI	SAN_MARINO	ab	0
+94	Jo GARTNER	SAN_MARINO	ab	0
+95	Piercarlo GHINZANI	SAN_MARINO	nq	0
+96	François HESNAULT	SAN_MARINO	ab	0
+97	Jacques LAFFITE	SAN_MARINO	ab	0
+98	Niki LAUDA	SAN_MARINO	ab	0
+99	Nigel MANSELL	SAN_MARINO	ab	0
+100	Jonathan PALMER	SAN_MARINO	9	0
+101	Riccardo PATRESE	SAN_MARINO	ab	0
+102	Nelson PIQUET	SAN_MARINO	ab	0
+103	Alain PROST	SAN_MARINO	1	9
+104	Keke ROSBERG	SAN_MARINO	ab	0
+105	Ayrton SENNA	SAN_MARINO	nq	0
+106	Marc SURER	SAN_MARINO	ab	0
+107	Patrick TAMBAY	SAN_MARINO	ab	0
+108	Derek WARWICK	SAN_MARINO	4	3
+109	Manfred WINKELHOCK	SAN_MARINO	ab	0
+110	Michele ALBORETO	FRANCE	ab	0
+111	Philippe ALLIOT	FRANCE	ab	0
+112	René ARNOUX	FRANCE	4	3
+113	Mauro BALDI	FRANCE	ab	0
+114	Stefan BELLOF	FRANCE	dsq	0
+115	Thierry BOUTSEN	FRANCE	11	0
+116	Martin BRUNDLE	FRANCE	dsq	0
+117	Johnny CECOTTO	FRANCE	ab	0
+118	Eddie CHEEVER	FRANCE	ab	0
+119	Elio De ANGELIS	FRANCE	5	2
+120	Andrea De CESARIS	FRANCE	10	0
+121	Teo FABI	FRANCE	9	0
+122	Jo GARTNER	FRANCE	f	0
+123	Piercarlo GHINZANI	FRANCE	12	0
+124	François HESNAULT	FRANCE	np	0
+125	Jacques LAFFITE	FRANCE	8	0
+126	Niki LAUDA	FRANCE	1	9
+127	Nigel MANSELL	FRANCE	3	4
+128	Jonathan PALMER	FRANCE	13	0
+129	Riccardo PATRESE	FRANCE	ab	0
+130	Nelson PIQUET	FRANCE	ab	0
+131	Alain PROST	FRANCE	7	0
+132	Keke ROSBERG	FRANCE	6	1
+133	Ayrton SENNA	FRANCE	ab	0
+134	Marc SURER	FRANCE	ab	0
+135	Patrick TAMBAY	FRANCE	2	6
+136	Derek WARWICK	FRANCE	ab	0
+137	Manfred WINKELHOCK	FRANCE	ab	0
+138	Michele ALBORETO	MONACO	6	1
+139	Philippe ALLIOT	MONACO	nq	0
+140	René ARNOUX	MONACO	3	4
+141	Mauro BALDI	MONACO	nq	0
+142	Stefan BELLOF	MONACO	dsq	0
+143	Thierry BOUTSEN	MONACO	nq	0
+144	Martin BRUNDLE	MONACO	nq	0
+145	Johnny CECOTTO	MONACO	ab	0
+146	Eddie CHEEVER	MONACO	nq	0
+147	Elio De ANGELIS	MONACO	5	2
+148	Andrea De CESARIS	MONACO	ab	0
+149	Corrado FABI	MONACO	ab	0
+150	Piercarlo GHINZANI	MONACO	7	0
+151	François HESNAULT	MONACO	ab	0
+152	Jacques LAFFITE	MONACO	8	0
+153	Niki LAUDA	MONACO	ab	0
+154	Nigel MANSELL	MONACO	ab	0
+155	Jonathan PALMER	MONACO	nq	0
+156	Riccardo PATRESE	MONACO	ab	0
+157	Nelson PIQUET	MONACO	ab	0
+158	Alain PROST	MONACO	1	9
+159	Keke ROSBERG	MONACO	4	3
+160	Ayrton SENNA	MONACO	2	6
+161	Marc SURER	MONACO	nq	0
+162	Patrick TAMBAY	MONACO	ab	0
+163	Derek WARWICK	MONACO	ab	0
+164	Manfred WINKELHOCK	MONACO	ab	0
+165	Michele ALBORETO	CANADA	ab	0
+166	Philippe ALLIOT	CANADA	10	0
+167	René ARNOUX	CANADA	5	2
+168	Mauro BALDI	CANADA	f	0
+169	Stefan BELLOF	CANADA	dsq	0
+170	Thierry BOUTSEN	CANADA	ab	0
+171	Martin BRUNDLE	CANADA	dsq	0
+172	Johnny CECOTTO	CANADA	9	0
+173	Eddie CHEEVER	CANADA	11	0
+174	Elio De ANGELIS	CANADA	4	3
+175	Andrea De CESARIS	CANADA	ab	0
+176	Corrado FABI	CANADA	ab	0
+177	Piercarlo GHINZANI	CANADA	ab	0
+178	François HESNAULT	CANADA	ab	0
+179	Jacques LAFFITE	CANADA	ab	0
+180	Niki LAUDA	CANADA	2	6
+181	Nigel MANSELL	CANADA	6	1
+182	Riccardo PATRESE	CANADA	ab	0
+183	Nelson PIQUET	CANADA	1	9
+184	Alain PROST	CANADA	3	4
+185	Keke ROSBERG	CANADA	ab	0
+186	Huub ROTHENGATTER	CANADA	nc	0
+187	Ayrton SENNA	CANADA	7	0
+188	Marc SURER	CANADA	ab	0
+189	Patrick TAMBAY	CANADA	f	0
+190	Mike THACKWELL	CANADA	ab	0
+191	Derek WARWICK	CANADA	ab	0
+192	Manfred WINKELHOCK	CANADA	8	0
+193	Michele ALBORETO	DETROIT	ab	0
+194	Philippe ALLIOT	DETROIT	ab	0
+195	Mario ANDRETTI	DETROIT	t	0
+196	René ARNOUX	DETROIT	ab	0
+197	Stefan BELLOF	DETROIT	dsq	0
+198	Thierry BOUTSEN	DETROIT	ab	0
+199	Martin BRUNDLE	DETROIT	dsq	0
+200	Johnny CECOTTO	DETROIT	ab	0
+201	Eddie CHEEVER	DETROIT	ab	0
+202	Elio De ANGELIS	DETROIT	2	6
+203	Andrea De CESARIS	DETROIT	ab	0
+204	Teo FABI	DETROIT	3	4
+205	Piercarlo GHINZANI	DETROIT	ab	0
+206	François HESNAULT	DETROIT	ab	0
+207	Jacques LAFFITE	DETROIT	5	2
+208	Niki LAUDA	DETROIT	ab	0
+209	Nigel MANSELL	DETROIT	ab	0
+210	Jonathan PALMER	DETROIT	ab	0
+211	Riccardo PATRESE	DETROIT	ab	0
+212	Nelson PIQUET	DETROIT	1	9
+213	Alain PROST	DETROIT	4	3
+214	Keke ROSBERG	DETROIT	ab	0
+215	Huub ROTHENGATTER	DETROIT	nq	0
+216	Ayrton SENNA	DETROIT	ab	0
+217	Marc SURER	DETROIT	ab	0
+218	Patrick TAMBAY	DETROIT	ab	0
+219	Derek WARWICK	DETROIT	ab	0
+220	Manfred WINKELHOCK	DETROIT	ab	0
+221	Michele ALBORETO	DAL	ab	0
+222	Philippe ALLIOT	DAL	np	0
+223	René ARNOUX	DAL	2	6
+224	Stefan BELLOF	DAL	dsq	0
+225	Thierry BOUTSEN	DAL	ab	0
+226	Martin BRUNDLE	DAL	nq	0
+227	Johnny CECOTTO	DAL	ab	0
+228	Eddie CHEEVER	DAL	ab	0
+229	Elio De ANGELIS	DAL	3	4
+230	Andrea De CESARIS	DAL	ab	0
+231	Corrado FABI	DAL	7	0
+232	Piercarlo GHINZANI	DAL	5	2
+233	François HESNAULT	DAL	ab	0
+234	Jacques LAFFITE	DAL	4	3
+235	Niki LAUDA	DAL	9	0
+236	Nigel MANSELL	DAL	6	1
+237	Jonathan PALMER	DAL	ab	0
+238	Riccardo PATRESE	DAL	ab	0
+239	Nelson PIQUET	DAL	ab	0
+240	Alain PROST	DAL	ab	0
+241	Keke ROSBERG	DAL	1	9
+242	Huub ROTHENGATTER	DAL	ab	0
+243	Ayrton SENNA	DAL	ab	0
+244	Marc SURER	DAL	ab	0
+245	Patrick TAMBAY	DAL	ab	0
+246	Derek WARWICK	DAL	ab	0
+247	Manfred WINKELHOCK	DAL	8	0
+248	Michele ALBORETO	BRITAIN	5	2
+249	Philippe ALLIOT	BRITAIN	ab	0
+250	René ARNOUX	BRITAIN	6	1
+251	Stefan BELLOF	BRITAIN	dsq	0
+252	Thierry BOUTSEN	BRITAIN	ab	0
+253	Johnny CECOTTO	BRITAIN	nq	0
+254	Eddie CHEEVER	BRITAIN	ab	0
+255	Elio De ANGELIS	BRITAIN	4	3
+256	Andrea De CESARIS	BRITAIN	10	0
+257	Teo FABI	BRITAIN	ab	0
+258	Jo GARTNER	BRITAIN	ab	0
+259	Piercarlo GHINZANI	BRITAIN	9	0
+260	François HESNAULT	BRITAIN	ab	0
+261	Stefan JOHANSSON	BRITAIN	dsq	0
+262	Jacques LAFFITE	BRITAIN	ab	0
+263	Niki LAUDA	BRITAIN	1	9
+264	Nigel MANSELL	BRITAIN	ab	0
+265	Jonathan PALMER	BRITAIN	ab	0
+266	Riccardo PATRESE	BRITAIN	12	0
+267	Nelson PIQUET	BRITAIN	7	0
+268	Alain PROST	BRITAIN	ab	0
+269	Keke ROSBERG	BRITAIN	ab	0
+270	Huub ROTHENGATTER	BRITAIN	nc	0
+271	Ayrton SENNA	BRITAIN	3	4
+272	Marc SURER	BRITAIN	11	0
+273	Patrick TAMBAY	BRITAIN	8	0
+274	Derek WARWICK	BRITAIN	2	6
+275	Manfred WINKELHOCK	BRITAIN	ab	0
+276	Michele ALBORETO	DEUTSCHLAND	ab	0
+277	Philippe ALLIOT	DEUTSCHLAND	ab	0
+278	René ARNOUX	DEUTSCHLAND	6	1
+279	Stefan BELLOF	DEUTSCHLAND	f	0
+280	Thierry BOUTSEN	DEUTSCHLAND	ab	0
+281	Eddie CHEEVER	DEUTSCHLAND	ab	0
+282	Elio De ANGELIS	DEUTSCHLAND	ab	0
+283	Andrea De CESARIS	DEUTSCHLAND	7	0
+284	Teo FABI	DEUTSCHLAND	ab	0
+285	Jo GARTNER	DEUTSCHLAND	ab	0
+286	Piercarlo GHINZANI	DEUTSCHLAND	ab	0
+287	François HESNAULT	DEUTSCHLAND	8	0
+288	Stefan JOHANSSON	DEUTSCHLAND	dsq	0
+289	Jacques LAFFITE	DEUTSCHLAND	ab	0
+290	Niki LAUDA	DEUTSCHLAND	2	6
+291	Nigel MANSELL	DEUTSCHLAND	4	3
+292	Jonathan PALMER	DEUTSCHLAND	ab	0
+293	Riccardo PATRESE	DEUTSCHLAND	ab	0
+294	Nelson PIQUET	DEUTSCHLAND	ab	0
+295	Alain PROST	DEUTSCHLAND	1	9
+296	Keke ROSBERG	DEUTSCHLAND	ab	0
+297	Huub ROTHENGATTER	DEUTSCHLAND	9	0
+298	Ayrton SENNA	DEUTSCHLAND	ab	0
+299	Marc SURER	DEUTSCHLAND	ab	0
+300	Patrick TAMBAY	DEUTSCHLAND	5	2
+301	Mike THACKWELL	DEUTSCHLAND	nq	0
+302	Derek WARWICK	DEUTSCHLAND	3	4
+303	Manfred WINKELHOCK	DEUTSCHLAND	ab	0
+304	Michele ALBORETO	AUSTRIA	3	4
+305	Philippe ALLIOT	AUSTRIA	11	0
+306	René ARNOUX	AUSTRIA	7	0
+307	Stefan BELLOF	AUSTRIA	nq	0
+308	Gerhard BERGER	AUSTRIA	12	0
+309	Thierry BOUTSEN	AUSTRIA	5	2
+310	Eddie CHEEVER	AUSTRIA	ab	0
+311	Elio De ANGELIS	AUSTRIA	ab	0
+312	Andrea De CESARIS	AUSTRIA	ab	0
+313	Teo FABI	AUSTRIA	4	3
+314	Jo GARTNER	AUSTRIA	ab	0
+315	Piercarlo GHINZANI	AUSTRIA	ab	0
+316	François HESNAULT	AUSTRIA	8	0
+317	Stefan JOHANSSON	AUSTRIA	nq	0
+318	Jacques LAFFITE	AUSTRIA	ab	0
+319	Niki LAUDA	AUSTRIA	1	9
+320	Nigel MANSELL	AUSTRIA	ab	0
+321	Jonathan PALMER	AUSTRIA	9	0
+322	Riccardo PATRESE	AUSTRIA	10	0
+323	Nelson PIQUET	AUSTRIA	2	6
+324	Alain PROST	AUSTRIA	ab	0
+325	Keke ROSBERG	AUSTRIA	ab	0
+326	Huub ROTHENGATTER	AUSTRIA	nc	0
+327	Ayrton SENNA	AUSTRIA	ab	0
+328	Marc SURER	AUSTRIA	6	1
+329	Patrick TAMBAY	AUSTRIA	ab	0
+330	Derek WARWICK	AUSTRIA	ab	0
+331	Manfred WINKELHOCK	AUSTRIA	np	0
+332	Michele ALBORETO	NETHERLANDS	ab	0
+333	Philippe ALLIOT	NETHERLANDS	10	0
+334	René ARNOUX	NETHERLANDS	11	0
+335	Stefan BELLOF	NETHERLANDS	dsq	0
+336	Thierry BOUTSEN	NETHERLANDS	ab	0
+337	Eddie CHEEVER	NETHERLANDS	13	0
+338	Elio De ANGELIS	NETHERLANDS	4	3
+339	Andrea De CESARIS	NETHERLANDS	ab	0
+340	Teo FABI	NETHERLANDS	5	2
+341	Jo GARTNER	NETHERLANDS	12	0
+342	Piercarlo GHINZANI	NETHERLANDS	ab	0
+343	François HESNAULT	NETHERLANDS	7	0
+344	Stefan JOHANSSON	NETHERLANDS	dsq	0
+345	Jacques LAFFITE	NETHERLANDS	ab	0
+346	Niki LAUDA	NETHERLANDS	2	6
+347	Nigel MANSELL	NETHERLANDS	3	4
+348	Jonathan PALMER	NETHERLANDS	9	0
+349	Riccardo PATRESE	NETHERLANDS	ab	0
+350	Nelson PIQUET	NETHERLANDS	ab	0
+351	Alain PROST	NETHERLANDS	1	9
+352	Keke ROSBERG	NETHERLANDS	8	0
+353	Huub ROTHENGATTER	NETHERLANDS	ab	0
+354	Ayrton SENNA	NETHERLANDS	ab	0
+355	Marc SURER	NETHERLANDS	ab	0
+356	Patrick TAMBAY	NETHERLANDS	6	1
+357	Derek WARWICK	NETHERLANDS	ab	0
+358	Manfred WINKELHOCK	NETHERLANDS	ab	0
+359	Michele ALBORETO	ITALY	2	6
+360	Philippe ALLIOT	ITALY	ab	0
+361	René ARNOUX	ITALY	ab	0
+362	Stefan BELLOF	ITALY	f	0
+363	Gerhard BERGER	ITALY	6	1
+364	Thierry BOUTSEN	ITALY	10	0
+365	Eddie CHEEVER	ITALY	9	0
+366	Elio De ANGELIS	ITALY	ab	0
+367	Andrea De CESARIS	ITALY	ab	0
+368	Teo FABI	ITALY	ab	0
+369	Jo GARTNER	ITALY	5	2
+370	Piercarlo GHINZANI	ITALY	7	0
+371	François HESNAULT	ITALY	ab	0
+372	Stefan JOHANSSON	ITALY	4	3
+373	Jacques LAFFITE	ITALY	ab	0
+374	Niki LAUDA	ITALY	1	9
+375	Nigel MANSELL	ITALY	ab	0
+376	Pierluigi MARTINI	ITALY	nq	0
+377	Jonathan PALMER	ITALY	ab	0
+378	Riccardo PATRESE	ITALY	3	4
+379	Nelson PIQUET	ITALY	ab	0
+380	Alain PROST	ITALY	ab	0
+381	Keke ROSBERG	ITALY	ab	0
+382	Huub ROTHENGATTER	ITALY	8	0
+383	Marc SURER	ITALY	ab	0
+384	Patrick TAMBAY	ITALY	ab	0
+385	Derek WARWICK	ITALY	ab	0
+386	Manfred WINKELHOCK	ITALY	np	0
+387	Michele ALBORETO	EURO	2	6
+388	Philippe ALLIOT	EURO	ab	0
+389	René ARNOUX	EURO	5	2
+390	Mauro BALDI	EURO	8	0
+391	Gerhard BERGER	EURO	ab	0
+392	Thierry BOUTSEN	EURO	9	0
+393	Eddie CHEEVER	EURO	ab	0
+394	Elio De ANGELIS	EURO	ab	0
+395	Andrea De CESARIS	EURO	7	0
+396	Teo FABI	EURO	ab	0
+397	Pascal FABRE	EURO	f	0
+398	Jo GARTNER	EURO	12	0
+399	Piercarlo GHINZANI	EURO	ab	0
+400	François HESNAULT	EURO	10	0
+401	Stefan JOHANSSON	EURO	ab	0
+402	Jacques LAFFITE	EURO	ab	0
+403	Niki LAUDA	EURO	4	3
+404	Nigel MANSELL	EURO	ab	0
+405	Jonathan PALMER	EURO	ab	0
+406	Riccardo PATRESE	EURO	6	1
+407	Nelson PIQUET	EURO	3	4
+408	Alain PROST	EURO	1	9
+409	Keke ROSBERG	EURO	ab	0
+410	Ayrton SENNA	EURO	ab	0
+411	Marc SURER	EURO	ab	0
+412	Patrick TAMBAY	EURO	ab	0
+413	Derek WARWICK	EURO	11	0
+414	Michele ALBORETO	PORTUGAL	4	3
+415	Philippe ALLIOT	PORTUGAL	ab	0
+416	René ARNOUX	PORTUGAL	9	0
+417	Mauro BALDI	PORTUGAL	15	0
+418	Stefan BELLOF	PORTUGAL	f	0
+419	Gerhard BERGER	PORTUGAL	13	0
+420	Thierry BOUTSEN	PORTUGAL	ab	0
+421	Eddie CHEEVER	PORTUGAL	17	0
+422	Elio De ANGELIS	PORTUGAL	5	2
+423	Andrea De CESARIS	PORTUGAL	12	0
+424	Jo GARTNER	PORTUGAL	16	0
+425	Piercarlo GHINZANI	PORTUGAL	ab	0
+426	François HESNAULT	PORTUGAL	ab	0
+427	Stefan JOHANSSON	PORTUGAL	11	0
+428	Jacques LAFFITE	PORTUGAL	14	0
+429	Niki LAUDA	PORTUGAL	2	6
+430	Nigel MANSELL	PORTUGAL	ab	0
+431	Jonathan PALMER	PORTUGAL	ab	0
+432	Riccardo PATRESE	PORTUGAL	8	0
+433	Nelson PIQUET	PORTUGAL	6	1
+434	Alain PROST	PORTUGAL	1	9
+435	Keke ROSBERG	PORTUGAL	ab	0
+436	Huub ROTHENGATTER	PORTUGAL	f	0
+437	Ayrton SENNA	PORTUGAL	3	4
+438	Philippe STREIFF	PORTUGAL	ab	0
+439	Marc SURER	PORTUGAL	ab	0
+440	Patrick TAMBAY	PORTUGAL	7	0
+441	Derek WARWICK	PORTUGAL	ab	0
+442	Manfred WINKELHOCK	PORTUGAL	10	0
+\.
+
+
+--
+-- Data for Name: race_winners; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.race_winners (race_id, race_name, winner_name, team) FROM stdin;
+1	BRAZIL	Alain PROST	McLaren
+2	SOUTH_AFRICA	Niki LAUDA	McLaren
+3	BELGIUM	Michele ALBORETO	Ferrari
+4	SAN_MARINO	Alain PROST	McLaren
+5	FRANCE	Niki LAUDA	McLaren
+6	MONACO	Alain PROST	McLaren
+7	CANADA	Nelson PIQUET	Brabham
+8	DETROIT	Nelson PIQUET	Brabham
+9	DALLAS	Keke ROSBERG	Williams
+10	BRITAIN	Niki LAUDA	McLaren
+11	DEUTSCHLAND	Alain PROST	McLaren
+12	AUSTRIA	Niki LAUDA	McLaren
+13	NETHERLANDS	Alain PROST	McLaren
+14	ITALY	Niki LAUDA	McLaren
+15	EURO	Alain PROST	McLaren
+16	PORTUGAL	Alain PROST	McLaren
+\.
+
+
+--
+-- Data for Name: races_result; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.races_result (result_id, pilot_name, race_name, finish_position, half_points) FROM stdin;
+1	Michele ALBORETO	BRAZIL	ab	f
+2	Philippe ALLIOT	BRAZIL	ab	f
+3	René ARNOUX	BRAZIL	ab	f
+4	Mauro BALDI	BRAZIL	ab	f
+5	Stefan BELLOF	BRAZIL	dsq	f
+6	Thierry BOUTSEN	BRAZIL	6	f
+7	Martin BRUNDLE	BRAZIL	dsq	f
+8	Johnny CECOTTO	BRAZIL	ab	f
+9	Eddie CHEEVER	BRAZIL	4	f
+10	Elio De ANGELIS	BRAZIL	3	f
+11	Andrea De CESARIS	BRAZIL	ab	f
+12	Teo FABI	BRAZIL	ab	f
+13	Piercarlo GHINZANI	BRAZIL	ab	f
+14	François HESNAULT	BRAZIL	ab	f
+15	Jacques LAFFITE	BRAZIL	ab	f
+16	Niki LAUDA	BRAZIL	ab	f
+17	Nigel MANSELL	BRAZIL	ab	f
+18	Jonathan PALMER	BRAZIL	8	f
+19	Riccardo PATRESE	BRAZIL	ab	f
+20	Nelson PIQUET	BRAZIL	ab	f
+21	Alain PROST	BRAZIL	1	f
+22	Keke ROSBERG	BRAZIL	2	f
+23	Ayrton SENNA	BRAZIL	ab	f
+24	Marc SURER	BRAZIL	7	f
+25	Patrick TAMBAY	BRAZIL	5	f
+26	Derek WARWICK	BRAZIL	ab	f
+27	Manfred WINKELHOCK	BRAZIL	exc	f
+28	Michele ALBORETO	SOUTH_AFRICA	11	f
+29	Philippe ALLIOT	SOUTH_AFRICA	ab	f
+30	René ARNOUX	SOUTH_AFRICA	ab	f
+31	Mauro BALDI	SOUTH_AFRICA	8	f
+32	Stefan BELLOF	SOUTH_AFRICA	dsq	f
+33	Thierry BOUTSEN	SOUTH_AFRICA	12	f
+34	Martin BRUNDLE	SOUTH_AFRICA	dsq	f
+35	Johnny CECOTTO	SOUTH_AFRICA	ab	f
+36	Eddie CHEEVER	SOUTH_AFRICA	ab	f
+37	Elio De ANGELIS	SOUTH_AFRICA	7	f
+38	Andrea De CESARIS	SOUTH_AFRICA	5	f
+39	Teo FABI	SOUTH_AFRICA	ab	f
+40	Piercarlo GHINZANI	SOUTH_AFRICA	np	f
+41	François HESNAULT	SOUTH_AFRICA	10	f
+42	Jacques LAFFITE	SOUTH_AFRICA	ab	f
+43	Niki LAUDA	SOUTH_AFRICA	1	f
+44	Nigel MANSELL	SOUTH_AFRICA	ab	f
+45	Jonathan PALMER	SOUTH_AFRICA	ab	f
+46	Riccardo PATRESE	SOUTH_AFRICA	4	f
+47	Nelson PIQUET	SOUTH_AFRICA	ab	f
+48	Alain PROST	SOUTH_AFRICA	2	f
+49	Keke ROSBERG	SOUTH_AFRICA	ab	f
+50	Ayrton SENNA	SOUTH_AFRICA	6	f
+51	Marc SURER	SOUTH_AFRICA	9	f
+52	Patrick TAMBAY	SOUTH_AFRICA	ab	f
+53	Derek WARWICK	SOUTH_AFRICA	3	f
+54	Manfred WINKELHOCK	SOUTH_AFRICA	ab	f
+55	Michele ALBORETO	BELGIUM	1	f
+56	Philippe ALLIOT	BELGIUM	nq	f
+57	René ARNOUX	BELGIUM	3	f
+58	Mauro BALDI	BELGIUM	ab	f
+59	Stefan BELLOF	BELGIUM	dsq	f
+60	Thierry BOUTSEN	BELGIUM	ab	f
+61	Martin BRUNDLE	BELGIUM	dsq	f
+62	Johnny CECOTTO	BELGIUM	ab	f
+63	Eddie CHEEVER	BELGIUM	ab	f
+64	Elio De ANGELIS	BELGIUM	5	f
+65	Andrea De CESARIS	BELGIUM	ab	f
+66	Teo FABI	BELGIUM	ab	f
+67	Piercarlo GHINZANI	BELGIUM	ab	f
+68	François HESNAULT	BELGIUM	ab	f
+69	Jacques LAFFITE	BELGIUM	ab	f
+70	Niki LAUDA	BELGIUM	ab	f
+71	Nigel MANSELL	BELGIUM	ab	f
+72	Jonathan PALMER	BELGIUM	10	f
+73	Riccardo PATRESE	BELGIUM	ab	f
+74	Nelson PIQUET	BELGIUM	9	f
+75	Alain PROST	BELGIUM	ab	f
+76	Keke ROSBERG	BELGIUM	4	f
+77	Ayrton SENNA	BELGIUM	6	f
+78	Marc SURER	BELGIUM	8	f
+79	Patrick TAMBAY	BELGIUM	7	f
+80	Derek WARWICK	BELGIUM	2	f
+81	Manfred WINKELHOCK	BELGIUM	ab	f
+82	Michele ALBORETO	SAN_MARINO	ab	f
+83	Philippe ALLIOT	SAN_MARINO	ab	f
+84	René ARNOUX	SAN_MARINO	2	f
+85	Mauro BALDI	SAN_MARINO	8	f
+86	Stefan BELLOF	SAN_MARINO	dsq	f
+87	Thierry BOUTSEN	SAN_MARINO	5	f
+88	Martin BRUNDLE	SAN_MARINO	dsq	f
+89	Johnny CECOTTO	SAN_MARINO	ab	f
+90	Eddie CHEEVER	SAN_MARINO	7	f
+91	Elio De ANGELIS	SAN_MARINO	3	f
+92	Andrea De CESARIS	SAN_MARINO	6	f
+93	Teo FABI	SAN_MARINO	ab	f
+94	Jo GARTNER	SAN_MARINO	ab	f
+95	Piercarlo GHINZANI	SAN_MARINO	nq	f
+96	François HESNAULT	SAN_MARINO	ab	f
+97	Jacques LAFFITE	SAN_MARINO	ab	f
+98	Niki LAUDA	SAN_MARINO	ab	f
+99	Nigel MANSELL	SAN_MARINO	ab	f
+100	Jonathan PALMER	SAN_MARINO	9	f
+101	Riccardo PATRESE	SAN_MARINO	ab	f
+102	Nelson PIQUET	SAN_MARINO	ab	f
+103	Alain PROST	SAN_MARINO	1	f
+104	Keke ROSBERG	SAN_MARINO	ab	f
+105	Ayrton SENNA	SAN_MARINO	nq	f
+106	Marc SURER	SAN_MARINO	ab	f
+107	Patrick TAMBAY	SAN_MARINO	ab	f
+108	Derek WARWICK	SAN_MARINO	4	f
+109	Manfred WINKELHOCK	SAN_MARINO	ab	f
+110	Michele ALBORETO	FRANCE	ab	f
+111	Philippe ALLIOT	FRANCE	ab	f
+112	René ARNOUX	FRANCE	4	f
+113	Mauro BALDI	FRANCE	ab	f
+114	Stefan BELLOF	FRANCE	dsq	f
+115	Thierry BOUTSEN	FRANCE	11	f
+116	Martin BRUNDLE	FRANCE	dsq	f
+117	Johnny CECOTTO	FRANCE	ab	f
+118	Eddie CHEEVER	FRANCE	ab	f
+119	Elio De ANGELIS	FRANCE	5	f
+120	Andrea De CESARIS	FRANCE	10	f
+121	Teo FABI	FRANCE	9	f
+122	Jo GARTNER	FRANCE	f	f
+123	Piercarlo GHINZANI	FRANCE	12	f
+124	François HESNAULT	FRANCE	np	f
+125	Jacques LAFFITE	FRANCE	8	f
+126	Niki LAUDA	FRANCE	1	f
+127	Nigel MANSELL	FRANCE	3	f
+128	Jonathan PALMER	FRANCE	13	f
+129	Riccardo PATRESE	FRANCE	ab	f
+130	Nelson PIQUET	FRANCE	ab	f
+131	Alain PROST	FRANCE	7	f
+132	Keke ROSBERG	FRANCE	6	f
+133	Ayrton SENNA	FRANCE	ab	f
+134	Marc SURER	FRANCE	ab	f
+135	Patrick TAMBAY	FRANCE	2	f
+136	Derek WARWICK	FRANCE	ab	f
+137	Manfred WINKELHOCK	FRANCE	ab	f
+138	Michele ALBORETO	MONACO	6	f
+139	Philippe ALLIOT	MONACO	nq	f
+140	René ARNOUX	MONACO	3	f
+141	Mauro BALDI	MONACO	nq	f
+142	Stefan BELLOF	MONACO	dsq	f
+143	Thierry BOUTSEN	MONACO	nq	f
+144	Martin BRUNDLE	MONACO	nq	f
+145	Johnny CECOTTO	MONACO	ab	f
+146	Eddie CHEEVER	MONACO	nq	f
+147	Elio De ANGELIS	MONACO	5	f
+148	Andrea De CESARIS	MONACO	ab	f
+149	Corrado FABI	MONACO	ab	f
+150	Piercarlo GHINZANI	MONACO	7	f
+151	François HESNAULT	MONACO	ab	f
+152	Jacques LAFFITE	MONACO	8	f
+153	Niki LAUDA	MONACO	ab	f
+154	Nigel MANSELL	MONACO	ab	f
+155	Jonathan PALMER	MONACO	nq	f
+156	Riccardo PATRESE	MONACO	ab	f
+157	Nelson PIQUET	MONACO	ab	f
+158	Alain PROST	MONACO	1	f
+159	Keke ROSBERG	MONACO	4	f
+160	Ayrton SENNA	MONACO	2	f
+161	Marc SURER	MONACO	nq	f
+162	Patrick TAMBAY	MONACO	ab	f
+163	Derek WARWICK	MONACO	ab	f
+164	Manfred WINKELHOCK	MONACO	ab	f
+165	Michele ALBORETO	CANADA	ab	f
+166	Philippe ALLIOT	CANADA	10	f
+167	René ARNOUX	CANADA	5	f
+168	Mauro BALDI	CANADA	f	f
+169	Stefan BELLOF	CANADA	dsq	f
+170	Thierry BOUTSEN	CANADA	ab	f
+171	Martin BRUNDLE	CANADA	dsq	f
+172	Johnny CECOTTO	CANADA	9	f
+173	Eddie CHEEVER	CANADA	11	f
+174	Elio De ANGELIS	CANADA	4	f
+175	Andrea De CESARIS	CANADA	ab	f
+176	Corrado FABI	CANADA	ab	f
+177	Piercarlo GHINZANI	CANADA	ab	f
+178	François HESNAULT	CANADA	ab	f
+179	Jacques LAFFITE	CANADA	ab	f
+180	Niki LAUDA	CANADA	2	f
+181	Nigel MANSELL	CANADA	6	f
+182	Riccardo PATRESE	CANADA	ab	f
+183	Nelson PIQUET	CANADA	1	f
+184	Alain PROST	CANADA	3	f
+185	Keke ROSBERG	CANADA	ab	f
+186	Huub ROTHENGATTER	CANADA	nc	f
+187	Ayrton SENNA	CANADA	7	f
+188	Marc SURER	CANADA	ab	f
+189	Patrick TAMBAY	CANADA	f	f
+190	Mike THACKWELL	CANADA	ab	f
+191	Derek WARWICK	CANADA	ab	f
+192	Manfred WINKELHOCK	CANADA	8	f
+193	Michele ALBORETO	DETROIT	ab	f
+194	Philippe ALLIOT	DETROIT	ab	f
+195	Mario ANDRETTI	DETROIT	t	f
+196	René ARNOUX	DETROIT	ab	f
+197	Stefan BELLOF	DETROIT	dsq	f
+198	Thierry BOUTSEN	DETROIT	ab	f
+199	Martin BRUNDLE	DETROIT	dsq	f
+200	Johnny CECOTTO	DETROIT	ab	f
+201	Eddie CHEEVER	DETROIT	ab	f
+202	Elio De ANGELIS	DETROIT	2	f
+203	Andrea De CESARIS	DETROIT	ab	f
+204	Teo FABI	DETROIT	3	f
+205	Piercarlo GHINZANI	DETROIT	ab	f
+206	François HESNAULT	DETROIT	ab	f
+207	Jacques LAFFITE	DETROIT	5	f
+208	Niki LAUDA	DETROIT	ab	f
+209	Nigel MANSELL	DETROIT	ab	f
+210	Jonathan PALMER	DETROIT	ab	f
+211	Riccardo PATRESE	DETROIT	ab	f
+212	Nelson PIQUET	DETROIT	1	f
+213	Alain PROST	DETROIT	4	f
+214	Keke ROSBERG	DETROIT	ab	f
+215	Huub ROTHENGATTER	DETROIT	nq	f
+216	Ayrton SENNA	DETROIT	ab	f
+217	Marc SURER	DETROIT	ab	f
+218	Patrick TAMBAY	DETROIT	ab	f
+219	Derek WARWICK	DETROIT	ab	f
+220	Manfred WINKELHOCK	DETROIT	ab	f
+221	Michele ALBORETO	DALLAS	ab	f
+222	Philippe ALLIOT	DALLAS	np	f
+223	René ARNOUX	DALLAS	2	f
+224	Stefan BELLOF	DALLAS	dsq	f
+225	Thierry BOUTSEN	DALLAS	ab	f
+226	Martin BRUNDLE	DALLAS	nq	f
+227	Johnny CECOTTO	DALLAS	ab	f
+228	Eddie CHEEVER	DALLAS	ab	f
+229	Elio De ANGELIS	DALLAS	3	f
+230	Andrea De CESARIS	DALLAS	ab	f
+231	Corrado FABI	DALLAS	7	f
+232	Piercarlo GHINZANI	DALLAS	5	f
+233	François HESNAULT	DALLAS	ab	f
+234	Jacques LAFFITE	DALLAS	4	f
+235	Niki LAUDA	DALLAS	9	f
+236	Nigel MANSELL	DALLAS	6	f
+237	Jonathan PALMER	DALLAS	ab	f
+238	Riccardo PATRESE	DALLAS	ab	f
+239	Nelson PIQUET	DALLAS	ab	f
+240	Alain PROST	DALLAS	ab	f
+241	Keke ROSBERG	DALLAS	1	f
+242	Huub ROTHENGATTER	DALLAS	ab	f
+243	Ayrton SENNA	DALLAS	ab	f
+244	Marc SURER	DALLAS	ab	f
+245	Patrick TAMBAY	DALLAS	ab	f
+246	Derek WARWICK	DALLAS	ab	f
+247	Manfred WINKELHOCK	DALLAS	8	f
+248	Michele ALBORETO	BRITAIN	5	f
+249	Philippe ALLIOT	BRITAIN	ab	f
+250	René ARNOUX	BRITAIN	6	f
+251	Stefan BELLOF	BRITAIN	dsq	f
+252	Thierry BOUTSEN	BRITAIN	ab	f
+253	Johnny CECOTTO	BRITAIN	nq	f
+254	Eddie CHEEVER	BRITAIN	ab	f
+255	Elio De ANGELIS	BRITAIN	4	f
+256	Andrea De CESARIS	BRITAIN	10	f
+257	Teo FABI	BRITAIN	ab	f
+258	Jo GARTNER	BRITAIN	ab	f
+259	Piercarlo GHINZANI	BRITAIN	9	f
+260	François HESNAULT	BRITAIN	ab	f
+261	Stefan JOHANSSON	BRITAIN	dsq	f
+262	Jacques LAFFITE	BRITAIN	ab	f
+263	Niki LAUDA	BRITAIN	1	f
+264	Nigel MANSELL	BRITAIN	ab	f
+265	Jonathan PALMER	BRITAIN	ab	f
+266	Riccardo PATRESE	BRITAIN	12	f
+267	Nelson PIQUET	BRITAIN	7	f
+268	Alain PROST	BRITAIN	ab	f
+269	Keke ROSBERG	BRITAIN	ab	f
+270	Huub ROTHENGATTER	BRITAIN	nc	f
+271	Ayrton SENNA	BRITAIN	3	f
+272	Marc SURER	BRITAIN	11	f
+273	Patrick TAMBAY	BRITAIN	8	f
+274	Derek WARWICK	BRITAIN	2	f
+275	Manfred WINKELHOCK	BRITAIN	ab	f
+276	Michele ALBORETO	DEUTSCHLAND	ab	f
+277	Philippe ALLIOT	DEUTSCHLAND	ab	f
+278	René ARNOUX	DEUTSCHLAND	6	f
+279	Stefan BELLOF	DEUTSCHLAND	f	f
+280	Thierry BOUTSEN	DEUTSCHLAND	ab	f
+281	Eddie CHEEVER	DEUTSCHLAND	ab	f
+282	Elio De ANGELIS	DEUTSCHLAND	ab	f
+283	Andrea De CESARIS	DEUTSCHLAND	7	f
+284	Teo FABI	DEUTSCHLAND	ab	f
+285	Jo GARTNER	DEUTSCHLAND	ab	f
+286	Piercarlo GHINZANI	DEUTSCHLAND	ab	f
+287	François HESNAULT	DEUTSCHLAND	8	f
+288	Stefan JOHANSSON	DEUTSCHLAND	dsq	f
+289	Jacques LAFFITE	DEUTSCHLAND	ab	f
+290	Niki LAUDA	DEUTSCHLAND	2	f
+291	Nigel MANSELL	DEUTSCHLAND	4	f
+292	Jonathan PALMER	DEUTSCHLAND	ab	f
+293	Riccardo PATRESE	DEUTSCHLAND	ab	f
+294	Nelson PIQUET	DEUTSCHLAND	ab	f
+295	Alain PROST	DEUTSCHLAND	1	f
+296	Keke ROSBERG	DEUTSCHLAND	ab	f
+297	Huub ROTHENGATTER	DEUTSCHLAND	9	f
+298	Ayrton SENNA	DEUTSCHLAND	ab	f
+299	Marc SURER	DEUTSCHLAND	ab	f
+300	Patrick TAMBAY	DEUTSCHLAND	5	f
+301	Mike THACKWELL	DEUTSCHLAND	nq	f
+302	Derek WARWICK	DEUTSCHLAND	3	f
+303	Manfred WINKELHOCK	DEUTSCHLAND	ab	f
+304	Michele ALBORETO	AUSTRIA	3	f
+305	Philippe ALLIOT	AUSTRIA	11	f
+306	René ARNOUX	AUSTRIA	7	f
+307	Stefan BELLOF	AUSTRIA	nq	f
+308	Gerhard BERGER	AUSTRIA	12	f
+309	Thierry BOUTSEN	AUSTRIA	5	f
+310	Eddie CHEEVER	AUSTRIA	ab	f
+311	Elio De ANGELIS	AUSTRIA	ab	f
+312	Andrea De CESARIS	AUSTRIA	ab	f
+313	Teo FABI	AUSTRIA	4	f
+314	Jo GARTNER	AUSTRIA	ab	f
+315	Piercarlo GHINZANI	AUSTRIA	ab	f
+316	François HESNAULT	AUSTRIA	8	f
+317	Stefan JOHANSSON	AUSTRIA	nq	f
+318	Jacques LAFFITE	AUSTRIA	ab	f
+319	Niki LAUDA	AUSTRIA	1	f
+320	Nigel MANSELL	AUSTRIA	ab	f
+321	Jonathan PALMER	AUSTRIA	9	f
+322	Riccardo PATRESE	AUSTRIA	10	f
+323	Nelson PIQUET	AUSTRIA	2	f
+324	Alain PROST	AUSTRIA	ab	f
+325	Keke ROSBERG	AUSTRIA	ab	f
+326	Huub ROTHENGATTER	AUSTRIA	nc	f
+327	Ayrton SENNA	AUSTRIA	ab	f
+328	Marc SURER	AUSTRIA	6	f
+329	Patrick TAMBAY	AUSTRIA	ab	f
+330	Derek WARWICK	AUSTRIA	ab	f
+331	Manfred WINKELHOCK	AUSTRIA	np	f
+332	Michele ALBORETO	NETHERLANDS	ab	f
+333	Philippe ALLIOT	NETHERLANDS	10	f
+334	René ARNOUX	NETHERLANDS	11	f
+335	Stefan BELLOF	NETHERLANDS	dsq	f
+336	Thierry BOUTSEN	NETHERLANDS	ab	f
+337	Eddie CHEEVER	NETHERLANDS	13	f
+338	Elio De ANGELIS	NETHERLANDS	4	f
+339	Andrea De CESARIS	NETHERLANDS	ab	f
+340	Teo FABI	NETHERLANDS	5	f
+341	Jo GARTNER	NETHERLANDS	12	f
+342	Piercarlo GHINZANI	NETHERLANDS	ab	f
+343	François HESNAULT	NETHERLANDS	7	f
+344	Stefan JOHANSSON	NETHERLANDS	dsq	f
+345	Jacques LAFFITE	NETHERLANDS	ab	f
+346	Niki LAUDA	NETHERLANDS	2	f
+347	Nigel MANSELL	NETHERLANDS	3	f
+348	Jonathan PALMER	NETHERLANDS	9	f
+349	Riccardo PATRESE	NETHERLANDS	ab	f
+350	Nelson PIQUET	NETHERLANDS	ab	f
+351	Alain PROST	NETHERLANDS	1	f
+352	Keke ROSBERG	NETHERLANDS	8	f
+353	Huub ROTHENGATTER	NETHERLANDS	ab	f
+354	Ayrton SENNA	NETHERLANDS	ab	f
+355	Marc SURER	NETHERLANDS	ab	f
+356	Patrick TAMBAY	NETHERLANDS	6	f
+357	Derek WARWICK	NETHERLANDS	ab	f
+358	Manfred WINKELHOCK	NETHERLANDS	ab	f
+359	Michele ALBORETO	ITALY	2	f
+360	Philippe ALLIOT	ITALY	ab	f
+361	René ARNOUX	ITALY	ab	f
+362	Stefan BELLOF	ITALY	f	f
+363	Gerhard BERGER	ITALY	6	f
+364	Thierry BOUTSEN	ITALY	10	f
+365	Eddie CHEEVER	ITALY	9	f
+366	Elio De ANGELIS	ITALY	ab	f
+367	Andrea De CESARIS	ITALY	ab	f
+368	Teo FABI	ITALY	ab	f
+369	Jo GARTNER	ITALY	5	f
+370	Piercarlo GHINZANI	ITALY	7	f
+371	François HESNAULT	ITALY	ab	f
+372	Stefan JOHANSSON	ITALY	4	f
+373	Jacques LAFFITE	ITALY	ab	f
+374	Niki LAUDA	ITALY	1	f
+375	Nigel MANSELL	ITALY	ab	f
+376	Pierluigi MARTINI	ITALY	nq	f
+377	Jonathan PALMER	ITALY	ab	f
+378	Riccardo PATRESE	ITALY	3	f
+379	Nelson PIQUET	ITALY	ab	f
+380	Alain PROST	ITALY	ab	f
+381	Keke ROSBERG	ITALY	ab	f
+382	Huub ROTHENGATTER	ITALY	8	f
+383	Marc SURER	ITALY	ab	f
+384	Patrick TAMBAY	ITALY	ab	f
+385	Derek WARWICK	ITALY	ab	f
+386	Manfred WINKELHOCK	ITALY	np	f
+387	Michele ALBORETO	EURO	2	f
+388	Philippe ALLIOT	EURO	ab	f
+389	René ARNOUX	EURO	5	f
+390	Mauro BALDI	EURO	8	f
+391	Gerhard BERGER	EURO	ab	f
+392	Thierry BOUTSEN	EURO	9	f
+393	Eddie CHEEVER	EURO	ab	f
+394	Elio De ANGELIS	EURO	ab	f
+395	Andrea De CESARIS	EURO	7	f
+396	Teo FABI	EURO	ab	f
+397	Pascal FABRE	EURO	f	f
+398	Jo GARTNER	EURO	12	f
+399	Piercarlo GHINZANI	EURO	ab	f
+400	François HESNAULT	EURO	10	f
+401	Stefan JOHANSSON	EURO	ab	f
+402	Jacques LAFFITE	EURO	ab	f
+403	Niki LAUDA	EURO	4	f
+404	Nigel MANSELL	EURO	ab	f
+405	Jonathan PALMER	EURO	ab	f
+406	Riccardo PATRESE	EURO	6	f
+407	Nelson PIQUET	EURO	3	f
+408	Alain PROST	EURO	1	f
+409	Keke ROSBERG	EURO	ab	f
+410	Ayrton SENNA	EURO	ab	f
+411	Marc SURER	EURO	ab	f
+412	Patrick TAMBAY	EURO	ab	f
+413	Derek WARWICK	EURO	11	f
+414	Michele ALBORETO	PORTUGAL	4	f
+415	Philippe ALLIOT	PORTUGAL	ab	f
+416	René ARNOUX	PORTUGAL	9	f
+417	Mauro BALDI	PORTUGAL	15	f
+418	Stefan BELLOF	PORTUGAL	f	f
+419	Gerhard BERGER	PORTUGAL	13	f
+420	Thierry BOUTSEN	PORTUGAL	ab	f
+421	Eddie CHEEVER	PORTUGAL	17	f
+422	Elio De ANGELIS	PORTUGAL	5	f
+423	Andrea De CESARIS	PORTUGAL	12	f
+424	Jo GARTNER	PORTUGAL	16	f
+425	Piercarlo GHINZANI	PORTUGAL	ab	f
+426	François HESNAULT	PORTUGAL	ab	f
+427	Stefan JOHANSSON	PORTUGAL	11	f
+428	Jacques LAFFITE	PORTUGAL	14	f
+429	Niki LAUDA	PORTUGAL	2	f
+430	Nigel MANSELL	PORTUGAL	ab	f
+431	Jonathan PALMER	PORTUGAL	ab	f
+432	Riccardo PATRESE	PORTUGAL	8	f
+433	Nelson PIQUET	PORTUGAL	6	f
+434	Alain PROST	PORTUGAL	1	f
+435	Keke ROSBERG	PORTUGAL	ab	f
+436	Huub ROTHENGATTER	PORTUGAL	f	f
+437	Ayrton SENNA	PORTUGAL	3	f
+438	Philippe STREIFF	PORTUGAL	ab	f
+439	Marc SURER	PORTUGAL	ab	f
+440	Patrick TAMBAY	PORTUGAL	7	f
+441	Derek WARWICK	PORTUGAL	ab	f
+442	Manfred WINKELHOCK	PORTUGAL	10	f
+\.
+
+
+--
+-- Data for Name: staging_grid_position; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.staging_grid_position (report_id, pilot_name, brazil, south_africa, belgium, san_marino, france, monaco, canada, detroit, dallas, britain, deutschland, austria, netherlands, italy, euro, portugal) FROM stdin;
+1	Michele ALBORETO	2	10	1	13	10	4	6	4	9	9	6	12	9	11	5	8
+2	Philippe ALLIOT	25	22	\N	23	22	\N	26	20	\N	24	22	25	26	23	25	27
+3	René ARNOUX	10	15	2	6	11	3	5	15	4	13	10	15	15	14	6	17
+4	Mauro BALDI	23	20	25	24	24	\N	\N	\N	\N	\N	\N	\N	\N	\N	24	25
+5	Stefan BELLOF	22	24	21	21	20	20	22	16	17	26	\N	\N	24	\N	\N	\N
+6	Gerhard BERGER	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	20	\N	20	18	23
+7	Thierry BOUTSEN	20	26	17	20	14	\N	18	13	20	12	15	17	11	19	11	18
+8	Martin BRUNDLE	18	25	22	22	23	\N	21	11	\N	\N	\N	\N	\N	\N	\N	\N
+9	Johnny CECOTTO	17	19	16	19	18	18	20	17	15	\N	\N	\N	\N	\N	\N	\N
+10	Eddie CHEEVER	12	16	11	8	16	\N	11	8	14	18	18	16	17	10	13	14
+11	Elio De ANGELIS	1	7	5	11	2	11	3	5	2	4	2	3	3	3	23	5
+12	Andrea De CESARIS	14	14	13	12	26	7	10	12	16	19	11	18	14	16	17	20
+13	Corrado FABI	\N	\N	\N	\N	\N	15	16	\N	11	\N	\N	\N	\N	\N	\N	\N
+14	Teo FABI	15	6	18	9	17	\N	\N	23	\N	14	8	7	10	5	10	\N
+15	Jo GARTNER	\N	\N	\N	26	\N	\N	\N	\N	\N	27	23	22	23	24	22	24
+16	Piercarlo GHINZANI	21	\N	20	\N	25	19	19	26	18	21	21	23	21	22	20	22
+17	François HESNAULT	19	17	23	17	\N	17	13	18	19	20	17	21	20	18	19	21
+18	Stefan JOHANSSON	\N	\N	\N	\N	\N	\N	\N	\N	\N	25	26	\N	25	17	26	10
+19	Jacques LAFFITE	13	11	15	15	12	16	17	19	24	16	12	11	8	13	14	15
+20	Niki LAUDA	6	8	14	5	9	8	8	10	5	3	7	4	6	4	15	11
+21	Nigel MANSELL	5	3	10	18	6	2	7	3	1	8	16	8	12	7	8	6
+22	Jonathan PALMER	26	21	26	25	21	\N	\N	24	25	23	25	24	22	26	21	26
+23	Riccardo PATRESE	11	18	7	10	15	14	14	25	21	17	20	13	18	9	9	12
+24	Nelson PIQUET	7	1	9	1	3	9	1	1	12	1	5	1	2	1	1	1
+25	Alain PROST	4	5	8	2	5	1	2	2	7	2	1	2	1	2	2	2
+26	Keke ROSBERG	9	2	3	3	4	10	15	21	8	5	19	9	7	6	4	4
+27	Huub ROTHENGATTER	\N	\N	\N	\N	\N	\N	24	\N	23	22	24	26	27	25	\N	\N
+28	Ayrton SENNA	16	13	19	\N	13	13	9	7	6	7	9	10	13	\N	12	3
+29	Philippe STREIFF	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	13
+30	Marc SURER	24	23	24	16	19	\N	23	22	22	15	14	19	19	15	16	16
+31	Patrick TAMBAY	8	4	12	14	1	6	\N	9	10	10	4	5	5	8	3	7
+32	Mike THACKWELL	\N	\N	\N	\N	\N	\N	25	\N	\N	\N	\N	\N	\N	\N	\N	\N
+33	Derek WARWICK	3	9	4	4	7	5	4	6	3	6	3	6	4	12	7	9
+34	Manfred WINKELHOCK	\N	12	6	7	8	12	12	14	13	11	13	14	16	21	\N	19
+35	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN
+\.
+
+
+--
+-- Data for Name: staging_laps_lead_pilots; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.staging_laps_lead_pilots (lead_id, pilot_name, laps_lead) FROM stdin;
+1	A.PROST	345.0
+2	N.PIQUET	241.0
+3	N.LAUDA	168.0
+4	M.ALBORETO	81.0
+5	P.TAMBAY	74.0
+6	N.MANSELL	40.0
+7	K.ROSBERG	33.0
+8	D.WARWICK	12.0
+9	E.De ANGELIS	7.0
+10	NaN	NaN
+\.
+
+
+--
+-- Data for Name: staging_laps_raced_pilots; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.staging_laps_raced_pilots (raced_id, pilot_name, laps_raced, percentage) FROM stdin;
+1	E.De ANGELIS	853.0	85.21%
+2	N.LAUDA	853.0	85.21%
+3	A.PROST	819.0	81.82%
+4	R.ARNOUX	817.0	81.62%
+5	P.TAMBAY	714.0	71.33%
+6	D.WARWICK	712.0	71.13%
+7	N.PIQUET	683.0	68.23%
+8	M.ALBORETO	682.0	68.13%
+9	T.BOUTSEN	674.0	67.33%
+10	A.De CESARIS	669.0	66.83%
+11	N.MANSELL	642.0	64.14%
+12	R.PATRESE	596.0	59.54%
+13	M.SURER	588.0	58.74%
+14	K.ROSBERG	583.0	58.24%
+15	E.CHEEVER	551.0	55.04%
+16	A.SENNA	549.0	54.85%
+17	T.FABI	539.0	53.85%
+18	J.PALMER	532.0	53.15%
+19	J.LAFFITE	530.0	52.95%
+20	S.BELLOF	472.0	47.15%
+21	M.BRUNDLE	444.0	44.36%
+22	F.HESNAULT	439.0	43.86%
+23	P.GHINZANI	427.0	42.66%
+24	M.WINKELHOCK	412.0	41.16%
+25	M.BALDI	386.0	38.56%
+26	P.ALLIOT	370.0	36.96%
+27	J.GARTNER	305.0	30.47%
+28	H.ROTHENGATTER	297.0	29.67%
+29	S.JOHANSSON	246.0	24.58%
+30	J.CECOTTO	236.0	23.58%
+31	G.BERGER	165.0	16.48%
+32	C.FABI	112.0	11.19%
+33	P.STREIFF	48.0	4.80%
+34	M.THACKWELL	29.0	2.90%
+35	NaN	NaN	NaN
+\.
+
+
+--
+-- Data for Name: staging_pilots; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.staging_pilots (pilot_id, pilot_name, chassis, engine, best_result, best_grid_position) FROM stdin;
+1	Michele ALBORETO	Ferrari	Ferrari	1	1
+2	Philippe ALLIOT	RAM	Hart	10	20
+3	René ARNOUX	Ferrari	Ferrari	2	2
+4	Mauro BALDI	Spirit	Hart	8	20
+5	Stefan BELLOF	Tyrrell	Ford Cosworth	\N	16
+6	NaN	McLaren	TAG Porsche	\N	\N
+7	Gerhard BERGER	ATS	BMW	6	18
+8	Thierry BOUTSEN	Arrows	Ford Cosworth	5	20
+9	NaN	Arrows	BMW	5	11
+10	Martin BRUNDLE	Tyrrell	Ford Cosworth	\N	11
+11	Johnny CECOTTO	Toleman	Hart	9	15
+12	Eddie CHEEVER	Alfa Romeo	Alfa Romeo	4	8
+13	Elio De ANGELIS	Lotus	Renault	2	1
+14	Andrea De CESARIS	Ligier	Renault	5	7
+15	Corrado FABI	Brabham	BMW	7	11
+16	Teo FABI	Brabham	BMW	3	5
+17	Pascal FABRE	Spirit	Hart	\N	\N
+18	Jo GARTNER	Osella	Alfa Romeo	5	22
+19	Piercarlo GHINZANI	Osella	Alfa Romeo	5	18
+20	François HESNAULT	Ligier	Renault	7	13
+21	Stefan JOHANSSON	Tyrrell	Ford Cosworth	\N	25
+22	NaN	Toleman	Hart	4	10
+23	Jacques LAFFITE	Williams	Honda	4	8
+24	Niki LAUDA	McLaren	TAG Porsche	1	3
+25	Nigel MANSELL	Lotus	Renault	3	1
+26	Pierluigi MARTINI	Toleman	Hart	\N	\N
+27	Jonathan PALMER	RAM	Hart	8	21
+28	Riccardo PATRESE	Alfa Romeo	Alfa Romeo	3	7
+29	Nelson PIQUET	Brabham	BMW	1	1
+30	Alain PROST	McLaren	TAG Porsche	1	1
+31	Keke ROSBERG	Williams	Honda	1	2
+32	Huub ROTHENGATTER	Spirit	Hart	8	22
+33	NaN	Spirit	Ford Cosworth	\N	\N
+34	Ayrton SENNA	Toleman	Hart	2	3
+35	Philippe STREIFF	Renault	Renault	\N	13
+36	Marc SURER	Arrows	Ford Cosworth	7	19
+37	NaN	Arrows	BMW	6	14
+38	Patrick TAMBAY	Renault	Renault	2	1
+39	Mike THACKWELL	RAM	Hart	\N	25
+40	NaN	Tyrrell	Ford Cosworth	\N	\N
+41	Derek WARWICK	Renault	Renault	2	3
+42	Manfred WINKELHOCK	ATS	BMW	8	6
+43	NaN	Brabham	BMW	10	19
+44	NaN	NaN	NaN	NaN	NaN
+\.
+
+
+--
+-- Data for Name: staging_races_result; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.staging_races_result (report_id, pilot_name, brazil, south_africa, belgium, san_marino, france, monaco, canada, detroit, dallas, britain, deutschland, austria, netherlands, italy, euro, portugal) FROM stdin;
+1	Michele ALBORETO	ab	11	1	ab	ab	6	ab	ab	ab	5	ab	3	ab	2	2	4
+2	Philippe ALLIOT	ab	ab	nq	ab	ab	nq	10	ab	np	ab	ab	11	10	ab	ab	ab
+3	Mario ANDRETTI	\N	\N	\N	\N	\N	\N	\N	t	\N	\N	\N	\N	\N	\N	\N	\N
+4	René ARNOUX	ab	ab	3	2	4	3	5	ab	2	6	6	7	11	ab	5	9
+5	Mauro BALDI	ab	8	ab	8	ab	nq	f	\N	\N	\N	\N	\N	\N	\N	8	15
+6	Stefan BELLOF	dsq	dsq	dsq	dsq	dsq	dsq	dsq	dsq	dsq	dsq	f	nq	dsq	f	\N	f
+7	Gerhard BERGER	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	12	\N	6	ab	13
+8	Thierry BOUTSEN	6	12	ab	5	11	nq	ab	ab	ab	ab	ab	5	ab	10	9	ab
+9	Martin BRUNDLE	dsq	dsq	dsq	dsq	dsq	nq	dsq	dsq	nq	\N	\N	\N	\N	\N	\N	\N
+10	Johnny CECOTTO	ab	ab	ab	ab	ab	ab	9	ab	ab	nq	\N	\N	\N	\N	\N	\N
+11	Eddie CHEEVER	4	ab	ab	7	ab	nq	11	ab	ab	ab	ab	ab	13	9	ab	17
+12	Elio De ANGELIS	3	7	5	3	5	5	4	2	3	4	ab	ab	4	ab	ab	5
+13	Andrea De CESARIS	ab	5	ab	6	10	ab	ab	ab	ab	10	7	ab	ab	ab	7	12
+14	Corrado FABI	\N	\N	\N	\N	\N	ab	ab	\N	7	\N	\N	\N	\N	\N	\N	\N
+15	Teo FABI	ab	ab	ab	ab	9	\N	\N	3	\N	ab	ab	4	5	ab	ab	\N
+16	Pascal FABRE	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	\N
+17	Jo GARTNER	\N	\N	\N	ab	f	\N	\N	\N	\N	ab	ab	ab	12	5	12	16
+18	Piercarlo GHINZANI	ab	np	ab	nq	12	7	ab	ab	5	9	ab	ab	ab	7	ab	ab
+19	François HESNAULT	ab	10	ab	ab	np	ab	ab	ab	ab	ab	8	8	7	ab	10	ab
+20	Stefan JOHANSSON	\N	\N	\N	\N	\N	\N	\N	\N	\N	dsq	dsq	nq	dsq	4	ab	11
+21	Jacques LAFFITE	ab	ab	ab	ab	8	8	ab	5	4	ab	ab	ab	ab	ab	ab	14
+22	Niki LAUDA	ab	1	ab	ab	1	ab	2	ab	9	1	2	1	2	1	4	2
+23	Nigel MANSELL	ab	ab	ab	ab	3	ab	6	ab	6	ab	4	ab	3	ab	ab	ab
+24	Pierluigi MARTINI	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	nq	\N	\N
+25	Jonathan PALMER	8	ab	10	9	13	nq	\N	ab	ab	ab	ab	9	9	ab	ab	ab
+26	Riccardo PATRESE	ab	4	ab	ab	ab	ab	ab	ab	ab	12	ab	10	ab	3	6	8
+27	Nelson PIQUET	ab	ab	9	ab	ab	ab	1	1	ab	7	ab	2	ab	ab	3	6
+28	Alain PROST	1	2	ab	1	7	1	3	4	ab	ab	1	ab	1	ab	1	1
+29	Keke ROSBERG	2	ab	4	ab	6	4	ab	ab	1	ab	ab	ab	8	ab	ab	ab
+30	Huub ROTHENGATTER	\N	\N	\N	\N	\N	\N	nc	nq	ab	nc	9	nc	ab	8	\N	f
+31	Ayrton SENNA	ab	6	6	nq	ab	2	7	ab	ab	3	ab	ab	ab	\N	ab	3
+32	Philippe STREIFF	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	ab
+33	Marc SURER	7	9	8	ab	ab	nq	ab	ab	ab	11	ab	6	ab	ab	ab	ab
+34	Patrick TAMBAY	5	ab	7	ab	2	ab	f	ab	ab	8	5	ab	6	ab	ab	7
+35	Mike THACKWELL	\N	\N	\N	\N	\N	\N	ab	\N	\N	\N	nq	\N	\N	\N	\N	\N
+36	Derek WARWICK	ab	3	2	4	ab	ab	ab	ab	ab	2	3	ab	ab	ab	11	ab
+37	Manfred WINKELHOCK	exc	ab	ab	ab	ab	ab	8	ab	8	ab	ab	np	ab	np	\N	10
+38	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN
+\.
+
+
+--
+-- Name: constructor_report_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.constructor_report_report_id_seq', 5, true);
+
+
+--
+-- Name: grid_position_position_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.grid_position_position_id_seq', 412, true);
+
+
+--
+-- Name: laps_efficiency_efficiency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.laps_efficiency_efficiency_id_seq', 9, true);
+
+
+--
+-- Name: laps_lead_stats_pilots_stat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.laps_lead_stats_pilots_stat_id_seq', 9, true);
+
+
+--
+-- Name: laps_raced_stats_pilots_stat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.laps_raced_stats_pilots_stat_id_seq', 34, true);
+
+
+--
+-- Name: pilot_stability_stability_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.pilot_stability_stability_id_seq', 29, true);
+
+
+--
+-- Name: pilots_top_win_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.pilots_top_win_id_seq', 37, true);
+
+
+--
+-- Name: pole_position_stats_stat_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.pole_position_stats_stat_id_seq', 6, true);
+
+
+--
+-- Name: race_points_point_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.race_points_point_id_seq', 442, true);
+
+
+--
+-- Name: race_winners_race_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.race_winners_race_id_seq', 16, true);
+
+
+--
+-- Name: races_result_result_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.races_result_result_id_seq', 442, true);
+
+
+--
+-- Name: staging_grid_position_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.staging_grid_position_report_id_seq', 35, true);
+
+
+--
+-- Name: staging_laps_lead_pilots_lead_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.staging_laps_lead_pilots_lead_id_seq', 10, true);
+
+
+--
+-- Name: staging_laps_raced_pilots_raced_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.staging_laps_raced_pilots_raced_id_seq', 35, true);
+
+
+--
+-- Name: staging_pilots_pilot_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.staging_pilots_pilot_id_seq', 44, true);
+
+
+--
+-- Name: staging_races_result_report_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.staging_races_result_report_id_seq', 38, true);
+
+
+--
+-- Name: constructor_report constructor_report_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.constructor_report
+    ADD CONSTRAINT constructor_report_pkey PRIMARY KEY (report_id);
+
+
+--
+-- Name: grid_position grid_position_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.grid_position
+    ADD CONSTRAINT grid_position_pkey PRIMARY KEY (position_id);
+
+
+--
+-- Name: laps_efficiency laps_efficiency_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.laps_efficiency
+    ADD CONSTRAINT laps_efficiency_pkey PRIMARY KEY (efficiency_id);
+
+
+--
+-- Name: laps_lead_stats_pilots laps_lead_stats_pilots_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.laps_lead_stats_pilots
+    ADD CONSTRAINT laps_lead_stats_pilots_pkey PRIMARY KEY (stat_id);
+
+
+--
+-- Name: laps_raced_stats_pilots laps_raced_stats_pilots_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.laps_raced_stats_pilots
+    ADD CONSTRAINT laps_raced_stats_pilots_pkey PRIMARY KEY (stat_id);
+
+
+--
+-- Name: pilot_stability pilot_stability_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pilot_stability
+    ADD CONSTRAINT pilot_stability_pkey PRIMARY KEY (stability_id);
+
+
+--
+-- Name: pilots_top pilots_top_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pilots_top
+    ADD CONSTRAINT pilots_top_pkey PRIMARY KEY (win_id);
+
+
+--
+-- Name: pole_position_stats pole_position_stats_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pole_position_stats
+    ADD CONSTRAINT pole_position_stats_pkey PRIMARY KEY (stat_id);
+
+
+--
+-- Name: race_points race_points_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.race_points
+    ADD CONSTRAINT race_points_pkey PRIMARY KEY (point_id);
+
+
+--
+-- Name: race_winners race_winners_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.race_winners
+    ADD CONSTRAINT race_winners_pkey PRIMARY KEY (race_id);
+
+
+--
+-- Name: races_result races_result_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.races_result
+    ADD CONSTRAINT races_result_pkey PRIMARY KEY (result_id);
+
+
+--
+-- Name: staging_grid_position staging_grid_position_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.staging_grid_position
+    ADD CONSTRAINT staging_grid_position_pkey PRIMARY KEY (report_id);
+
+
+--
+-- Name: staging_laps_lead_pilots staging_laps_lead_pilots_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.staging_laps_lead_pilots
+    ADD CONSTRAINT staging_laps_lead_pilots_pkey PRIMARY KEY (lead_id);
+
+
+--
+-- Name: staging_laps_raced_pilots staging_laps_raced_pilots_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.staging_laps_raced_pilots
+    ADD CONSTRAINT staging_laps_raced_pilots_pkey PRIMARY KEY (raced_id);
+
+
+--
+-- Name: staging_pilots staging_pilots_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.staging_pilots
+    ADD CONSTRAINT staging_pilots_pkey PRIMARY KEY (pilot_id);
+
+
+--
+-- Name: staging_races_result staging_races_result_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.staging_races_result
+    ADD CONSTRAINT staging_races_result_pkey PRIMARY KEY (report_id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict tOkRYTXCSPEaWe1KFLqpD70b7ZFqYbmWyddLSixAkcfbrJnSkfQkpgJhyd1rJYN
+
