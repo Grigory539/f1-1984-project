@@ -104,7 +104,7 @@
 # Airflow — оркестрация ELT процессов (автоматизация, планирование, мониторинг)
 # Python — (requests, pandas, SQLAlchemy, psycopg2) - парсинг, работа с данными, подключение к PostgreSQL.
 # Docker — контейнеризация инфраструктуры (PostgreSQL + Airflow в отдельных контейнерах)
-# Git — скрипты для инициализации
+# Git — система контроля версий
 # Power BI — интерактивные дашборды, визуализация данных
 
 
@@ -167,7 +167,8 @@ f1-1984-project/
 # Пошаговая инструкция
 
 1. **Клонируйте репозиторий**
-   git clone <your-repo
+   git clone https://github.com/Grigory539/f1-1984-project.git
+   cd f1-1984-project
 
 
 2. **Запустите Docker контейнеры**
